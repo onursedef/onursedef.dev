@@ -1,3 +1,13 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+@layer base {
+	html,
+	body {
+		@apply bg-slate-900 font-inter text-white;
+	}
+}
