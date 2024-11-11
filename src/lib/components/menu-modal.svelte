@@ -6,6 +6,13 @@
 
 	$effect(() => {
 		if ($menuOpen) document.documentElement.style.overflow = 'hidden';
+		if ($menuOpen) {
+			document.querySelector('#modal')?.addEventListener('click', (e) => {
+				if (e.target === document.querySelector('#modal')) {
+					toggleModal();
+				}
+			});
+		}
 		return () => (document.documentElement.style.overflow = 'auto');
 	});
 
@@ -125,9 +132,11 @@
 			]
 		}
 	];
+	
 </script>
 
 <div
+	id="modal"
 	transition:fade={{ duration: 300 }}
 	class="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full items-center justify-center bg-black/25 backdrop-blur-md transition-all {$menuOpen
 		? ''
