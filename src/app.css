@@ -10,6 +10,12 @@
 	body {
 		@apply bg-slate-900 font-inter text-white;
 	}
+	::-webkit-scrollbar {
+		@apply w-3 bg-slate-800/65;
+	}
+	::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-slate-700/65 hover:bg-slate-700;
+	}
 }
 
 @keyframes up-and-down {
