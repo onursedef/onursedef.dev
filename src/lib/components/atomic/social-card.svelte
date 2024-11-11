@@ -31,16 +31,16 @@
 		? `border ${borderColor}`
 		: ''} overflow-hidden"
 >
-	<div class="flex h-full w-full items-center justify-between px-4">
+	<div class="flex h-full w-full items-center justify-between px-3">
 		<div class="flex flex-col items-center gap-1 text-left">
 			<a
 				href={link}
-				class="{titleBg} cursor-pointer select-none rounded-2xl px-3 py-1 text-sm transition-colors {titleColor}"
+				class="{titleBg} cursor-pointer select-none rounded-2xl px-3 py-1 text-left text-sm transition-colors {titleColor}"
 				>{title}</a
 			>
 			<p class="select-none text-left text-sm">{description}</p>
 		</div>
-		<div class="absolute right-2 h-28 w-28 rounded-lg {iconColor}">
+		<div class="absolute right-1 h-28 w-28 rounded-lg {iconColor}">
 			{@render children()}
 		</div>
 	</div>
