@@ -3,6 +3,7 @@
 	import Footer from '$lib/components/footer.svelte';
 
 	import '../app.css';
+	import MenuModal from '$lib/components/menu-modal.svelte';
 
 	let { children } = $props();
 </script>
@@ -22,3 +23,5 @@
 	</main>
 	<Footer />
 </div>
+
+<MenuModal />

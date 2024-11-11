@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { menuOpen } from '$lib/stores/uiStore';
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import { Command } from 'lucide-svelte';
 	import { fade } from 'svelte/transition';
@@ -15,10 +16,15 @@
 		closeOnPointerDown: false,
 		forceVisible: true
 	});
+
+	const toggleModal = () => {
+		menuOpen.update((value) => !value);
+	};
 </script>
 
 <button
 	use:melt={$trigger}
+	on:click={toggleModal}
 	aria-roledescription="tooltip"
 	aria-label="Open Menu"
 	class="cursor-pointer rounded-lg border border-indigo-800/30 bg-indigo-600/30 p-3 transition-all hover:bg-indigo-600"
