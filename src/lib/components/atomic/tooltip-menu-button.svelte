@@ -20,11 +20,27 @@
 	const toggleModal = () => {
 		menuOpen.update((value) => !value);
 	};
+
+	$effect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+				e.preventDefault();
+				console.log('pressed');
+				menuOpen.update((value) => !value);
+			}
+		};
+		document.addEventListener('keydown', handleKeyDown);
+
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	});
 </script>
 
 <button
+	id="menu-button"
 	use:melt={$trigger}
-	on:click={toggleModal}
+	onclick={toggleModal}
 	aria-roledescription="tooltip"
 	aria-label="Open Menu"
 	class="cursor-pointer rounded-lg border border-indigo-800/30 bg-indigo-600/30 p-3 transition-all hover:bg-indigo-600"
