@@ -2,7 +2,6 @@
 	import Computer_3d from '$lib/components/atomic/computer-3d.svelte';
 	import HomePost from '$lib/components/atomic/home-post.svelte';
 	import { Canvas } from '@threlte/core';
-	import { Eye, Folder } from 'lucide-svelte';
 
 	const posts = [
 		{
@@ -53,7 +52,7 @@
 	];
 </script>
 
-<div class="my-5 flex justify-between">
+<div class="my-5 flex justify-between px-2 flex-col lg:flex-row lg:px-0">
 	<div class="flex flex-col gap-3">
 		<h1 class="text-4xl font-bold">Onur Sedef</h1>
 		<p class="font-light">
@@ -77,7 +76,7 @@
 	</div>
 </div>
 <div class="my-5 flex flex-col">
-	<div class="inline-flex w-full items-end justify-between py-3">
+	<div class="inline-flex w-full items-end justify-between py-3 px-3 lg:px-0">
 		<h1 class="text-2xl font-bold">Latest Posts</h1>
 		<a href="/blog" class="text-sm font-light text-indigo-400">See More</a>
 	</div>

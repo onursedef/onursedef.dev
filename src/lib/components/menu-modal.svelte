@@ -148,7 +148,7 @@
 		transition:fade={{ duration: 200 }}
 	>
 		<div
-			class="flex h-2/4 w-1/4 flex-col rounded-xl border-2 border-slate-900 bg-slate-900/90 shadow-2xl"
+			class="flex lg:h-2/4 lg:w-1/4 w-96 flex-col rounded-xl border-2 border-slate-900 bg-slate-900/90 shadow-2xl"
 			transition:scale={{ duration: 200 }}
 		>
 			<div class="flex h-full w-full flex-col justify-between text-white">

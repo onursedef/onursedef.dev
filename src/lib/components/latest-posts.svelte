@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { Eye, Tags } from 'lucide-svelte';
+	import { Eye, Menu, Tags } from 'lucide-svelte';
 	import Placeholder1 from '../../assets/images/placeholder-1.jpg';
 	import CategoryChip from './atomic/category-chip.svelte';
 	import ListPost from './atomic/list-post.svelte';
+	import { createDropdownMenu, melt } from '@melt-ui/svelte';
+	import CategoryDropdown from './atomic/category-dropdown.svelte';
 
 	let posts = {
 		featured: [
@@ -79,6 +81,18 @@
 				tags: ['technology', 'earbuds'],
 				date: '2023-10-01',
 				readTime: '5 min read'
+			},
+			{
+				slug: '#',
+				title: 'How Good Is Anker Soundcore R50I',
+				image: Placeholder1,
+				views: 4321,
+				category: 'Technology',
+				description:
+					'Anker Soundcore R50I is a great pair of earbuds that you can buy. It has a great sound quality and a great battery life.',
+				tags: ['technology', 'earbuds'],
+				date: '2023-10-01',
+				readTime: '5 min read'
 			}
 		]
 	};
@@ -97,17 +111,33 @@
 			slug: 'science'
 		}
 	];
+
+	const {
+		elements: { menu, item, trigger, arrow }
+	} = createDropdownMenu();
 </script>
 
-<div class="flex flex-col gap-2">
+<div class="flex lg:hidden flex-col gap-2">
+	<div class="flex justify-between">
+		<h1 class="text-3xl font-bold">Latest</h1>
+		<div class="hidden lg:inline-flex gap-2">
+			<CategoryChip name="All" slug="all" selected={true} />
+			{#each categories as category}
+			<CategoryChip {...category} selected={false} />
+			{/each}
+		</div>
+		<CategoryDropdown categories={categories} />
+	</div>
+	<div class="mt-2 grid grid-cols-2 gap-2">
+		{#each posts.latest as post}
+			<ListPost {...post} size="medium" />
+		{/each}
+	</div>
+</div>
+<div class="hidden lg:flex flex-col gap-2">
 	<h1 class="text-3xl font-bold">Latest</h1>
 	<div class="inline-flex gap-2">
-		<a
-			href=""
-			class="rounded-lg border-2 border-slate-800 bg-slate-700/65 px-6 py-1 transition-colors hover:bg-slate-800"
-		>
-			All
-		</a>
+		<CategoryChip name="All" slug="all" selected={true} />
 		{#each categories as category}
 			<CategoryChip {...category} selected={false} />
 		{/each}

@@ -4,6 +4,7 @@
 	import { ExternalLink, GithubIcon } from "lucide-svelte";
     import Placeholder from '../../assets/images/placeholder-1.jpg';
 	import WorkCard from "$lib/components/atomic/work-card.svelte";
+	import CategoryDropdown from "$lib/components/atomic/category-dropdown.svelte";
 
     const categories = [
         {
@@ -60,9 +61,13 @@
     ]
 </script>
 
-<div class="flex flex-col gap-5">
-    <h1 class="text-3xl font-bold">Works</h1>
-    <div class="inline-flex gap-2">
+<div class="flex flex-col gap-5 px-3">
+    <div class="inline-flex lg:hidden items-center justify-between">
+        <h1 class="text-3xl font-bold">Works</h1>
+        <CategoryDropdown categories={categories} />
+    </div>
+    <h1 class="text-3xl font-bold hidden lg:block">Works</h1>
+    <div class="hidden lg:inline-flex gap-2">
         <a
 			href=""
 			class="rounded-lg border-2 border-slate-800 bg-slate-700/65 px-6 py-1 transition-colors hover:bg-slate-800"
@@ -73,7 +78,7 @@
             <CategoryChip {...category} selected={false} />
         {/each}
     </div>
-    <div class="grid grid-cols-3 gap-2">
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
         {#each works as work}
             <WorkCard {...work} />
         {/each}

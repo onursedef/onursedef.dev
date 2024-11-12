@@ -34,7 +34,7 @@
             </div>
         </div>
         <p class="items-center gap-4 text-xs text-gray-500">{category}</p>
-        <p class="line-clamp-2 text-wrap text-sm">
+        <p class="line-clamp-3 lg:line-clamp-2 text-wrap text-sm">
             {description}
         </p>
         

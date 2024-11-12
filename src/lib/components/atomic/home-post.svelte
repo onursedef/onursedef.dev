@@ -6,7 +6,7 @@
 
 <a
 	href="#"
-	class="flex w-full flex-1 gap-3 rounded-lg p-3 transition-colors hover:bg-indigo-600/25"
+	class="flex w-full flex-1 gap-3 rounded-lg p-3 transition-colors hover:bg-slate-800/65"
 >
 	<img src={post.image_url} alt={post.title} class="w-48 rounded-lg object-cover" />
 	<div class="flex w-4/5 flex-col gap-2">
