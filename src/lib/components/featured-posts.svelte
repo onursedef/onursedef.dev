@@ -48,7 +48,7 @@
 
 <div class="flex flex-col gap-2">
 	<h1 class="text-3xl font-bold">Featured</h1>
-	<div class="flex max-h-[24rem] gap-3">
+	<div class="flex max-h-[24rem] gap-2">
 		<ListPost
 			{...posts.featured[0]}
 			size="large"
