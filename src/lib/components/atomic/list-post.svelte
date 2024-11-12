@@ -27,44 +27,44 @@
 </script>
 
 {#if size === 'small'}
-	<div class="flex w-full items-center gap-2">
+	<div class="flex w-full items-center gap-2 hover:bg-slate-800/65 p-2 rounded-lg">
 		<img src={image} alt="placeholder" class="h-20 w-24 flex-shrink-0 rounded-xl object-cover" />
 		<div>
-			<a href={slug} class="line-clamp-2 text-lg font-bold hover:underline">{title}</a>
+			<a aria-label="{title}" href={slug} class="line-clamp-2 text-lg font-bold hover:underline">{title}</a>
 			<p class="text-sm text-gray-500">Date</p>
 		</div>
 	</div>
 {:else if size === 'medium'}
 	<div class="flex gap-3 rounded-lg p-2 transition-colors hover:bg-slate-800/65">
-		<a href="" class="aspect-1 h-32"
-			><img src={image} alt="placeholder" class="aspect-1 rounded-lg object-cover" /></a
+		<a href="" class="aspect-[3/2] h-28"
+			><img src={image} alt="placeholder" class="aspect-[3/2] rounded-lg object-cover" /></a
 		>
-		<div class="flex flex-col justify-between">
+		<div class="flex flex-col gap-2">
 			<div>
-				<a href={slug} class="text-xl font-bold">
+				<a href={slug} class="text-lg font-bold">
 					{title}
 				</a>
-				<p class="mt-1 text-sm text-gray-500">{category}</p>
+				<div class="inline-flex items-center gap-4 text-xs text-gray-500">
+					<p class=" text-gray-500">{category}</p>
+					<div class="inline-flex items-center gap-2">
+						<Tags class="h-3 w-3" />
+						<p>{tags.map((tag: string) => tag).join(', ')}</p>
+					</div>
+					<div class="inline-flex items-center gap-2 text-gray-500">
+						<Eye class="h-3 w-3" />
+						<p>{views}</p>
+					</div>
+					<div class="inline-flex items-center gap-2 text-gray-500">
+						<p>{date}</p>
+					</div>
+					<div class="inline-flex items-center gap-2 text-gray-500">
+						<p>{readTime}</p>
+					</div>
+				</div>
 			</div>
 			<p class="line-clamp-2 text-wrap text-sm">
 				{description}
 			</p>
-			<div class="inline-flex items-center gap-4 text-sm text-gray-500">
-				<div class="inline-flex items-center gap-2">
-					<Tags class="h-5 w-5" />
-					<p>{tags.map((tag: string) => tag).join(', ')}</p>
-				</div>
-				<div class="inline-flex items-center gap-2 text-gray-500">
-					<Eye class="h-5 w-5" />
-					<p>{views}</p>
-				</div>
-				<div class="inline-flex items-center gap-2 text-gray-500">
-					<p>{date}</p>
-				</div>
-				<div class="inline-flex items-center gap-2 text-gray-500">
-					<p>{readTime}</p>
-				</div>
-			</div>
 		</div>
 	</div>
 {:else if size === 'large'}
