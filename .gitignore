@@ -25,3 +25,9 @@ vite.config.ts.timestamp-*
 
 # Bun
 bun.lockb
+
+# Prisma
+prisma/migrations
+
+# IDE
+.vscode
