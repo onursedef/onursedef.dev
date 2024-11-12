@@ -1,0 +1,399 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Image {
+  id Int @id @default(autoincrement())
+
+  url String
+  order Int @default(0)
+
+  User User[]
+
+  Post Post[]
+
+  WorkImage WorkImage[]
+
+  Work Work[]
+
+  Experience Experience[]
+
+  Education Education[]
+
+  Certificate Certificate[]
+}
+
+model Blob {
+  id Int @id @default(autoincrement())
+
+  mimeType String
+  path String
+  size Int
+  fileName String
+  fileExtension String
+
+  createdOnUtc DateTime @default(now())
+}
+
+// User Model
+model User {
+  id  String @id @db.VarChar(300)
+  imageId Int?
+
+  email String @unique
+  username String? @unique
+  password String?
+  phoneNumber String?
+  location String?
+  fullName String?
+  bio String?
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  image Image? @relation(fields: [imageId], references: [id])
+  role Role @default(GUEST)
+
+  Comment Comment[]
+
+  Work Work[]
+
+  Experience Experience[]
+
+  Education Education[]
+
+  Certificate Certificate[]
+
+  Language Language[]
+
+  Notification Notification[]
+}
+
+enum Role {
+  ADMIN
+  GUEST
+}
+
+model Tag {
+  id Int @id @default(autoincrement())
+  
+  name String @unique
+  slug String @unique
+  published Boolean @default(false)
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  publishedAt DateTime?
+
+  PostTag PostTag[]
+
+  WorkTag WorkTag[]
+}
+
+model PostTag {
+  postId Int
+  tagId Int
+
+  post Post @relation(fields: [postId], references: [id])
+  tag Tag @relation(fields: [tagId], references: [id])
+
+  @@id([postId, tagId])
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  
+  name String @unique
+  slug String @unique
+  published Boolean @default(false)
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  publishedAt DateTime?
+
+  Post Post[]
+
+  Work Work[]
+}
+
+model Collection {
+  id Int @id @default(autoincrement())
+  
+  name String @unique
+  slug String @unique
+  published Boolean @default(false)
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  publishedAt DateTime?
+
+  PostCollection PostCollection[]
+}
+
+model PostCollection {
+  postId Int
+  collectionId Int
+
+  post Post @relation(fields: [postId], references: [id])
+  collection Collection @relation(fields: [collectionId], references: [id])
+
+  @@id([postId, collectionId])
+}
+
+model Metadata {
+  id Int @id @default(autoincrement())
+
+  key String @unique
+  value String
+
+  PostMetaData PostMetaData[]
+}
+
+model PostMetaData {
+  postId Int
+  metadataId Int
+
+  post Post @relation(fields: [postId], references: [id])
+  metadata Metadata @relation(fields: [metadataId], references: [id])
+
+  @@id([postId, metadataId])
+}
+
+// Post Model
+model Post {
+  id Int @id @default(autoincrement())
+  categoryId Int
+  featuredImageId Int?
+
+  slug String @unique
+  title String
+  content String
+  likeCount Int @default(0)
+  viewCount Int @default(0)
+  timeToRead Int @default(0)
+  published Boolean @default(false)
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  publishedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Category Category @relation(fields: [categoryId], references: [id])
+  FeaturedImage Image? @relation(fields: [featuredImageId], references: [id])
+  PostTag PostTag[]
+  PostCollection PostCollection[]
+  PostMetaData PostMetaData[]
+
+  Comment Comment[]
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  postId Int
+  userId String
+  commentId Int?
+
+  content String
+  username String
+  email String
+  likeCount Int @default(0)
+  approved Boolean @default(false)
+  deleted Boolean @default(false)
+
+  deletedAt DateTime?
+  approvedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post Post @relation(fields: [postId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  Comment Comment? @relation("CommentReplies", fields: [commentId], references: [id])
+  Replies Comment[] @relation("CommentReplies")
+}
+
+model WorkLink {
+  id Int @id @default(autoincrement())
+  workId Int
+  title String
+  url String
+
+  Work Work @relation(fields: [workId], references: [id])
+}
+
+model WorkImage {
+  id Int @id @default(autoincrement())
+  workId Int
+  imageId Int
+
+  Work Work @relation(fields: [workId], references: [id])
+  Image Image @relation(fields: [imageId], references: [id])
+}
+
+model WorkTag {
+  id Int @id @default(autoincrement())
+  workId Int
+  tagId Int
+
+  Work Work @relation(fields: [workId], references: [id])
+  Tag Tag @relation(fields: [tagId], references: [id])
+}
+
+model Work {
+  id Int @id @default(autoincrement())
+  userId String
+  categoryId Int
+  featuredImageId Int?
+
+  slug String @unique
+  title String
+  content String
+  published Boolean @default(false)
+  deleted Boolean @default(false)
+
+  publishedAt DateTime?
+  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  WorkLink WorkLink[]
+  WorkImage WorkImage[]
+  User User @relation(fields: [userId], references: [id])
+  Category Category @relation(fields: [categoryId], references: [id])
+  FeaturedImage Image? @relation(fields: [featuredImageId], references: [id])
+  WorkTag WorkTag[]
+}
+
+model Experience {
+  id Int @id @default(autoincrement())
+  userId String
+  companyImageId Int?
+
+  companyName String
+  position String
+  location String
+  description String
+  technologies String
+  startDate DateTime
+  endDate DateTime?
+  working Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id])
+  CompanyImage Image? @relation(fields: [companyImageId], references: [id])
+}
+
+model Education {
+  id Int @id @default(autoincrement())
+  userId String
+  schoolImageId Int?
+
+  schoolName String
+  degree String
+  fieldOfStudy String
+  grade String
+  startDate DateTime
+  endDate DateTime?
+  isGraduated Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id])
+  SchoolImage Image? @relation(fields: [schoolImageId], references: [id])
+}
+
+model Certificate {
+  id Int @id @default(autoincrement())
+  userId String
+  imageId Int
+
+  title String
+  description String
+  issuedBy String
+  issuedDate DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id])
+  Image Image @relation(fields: [imageId], references: [id])
+}
+
+model Language {
+  id     Int @id @default(autoincrement())
+  userId String
+
+  name  String
+  level String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model SkillGroup {
+  id     Int @id @default(autoincrement())
+  userId Int
+
+  name        String
+  description String?
+
+  skills Skill[]
+}
+
+model Skill {
+  id           Int @id @default(autoincrement())
+  skillGroupId Int
+  userId       Int
+
+  name        String
+  level       String?
+  description String?
+  url         String?
+
+  skillGroup SkillGroup @relation(fields: [skillGroupId], references: [id])
+}
+
+model Notification {
+  id     Int  @id @default(autoincrement())
+  userId String?
+
+  title   String
+  href    String
+  type    NotificationType
+  isRead  Boolean          @default(false)
+  deleted Boolean          @default(false)
+
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+}
+
+model Newsletter {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  timeToSent DateTime
+  sentAt DateTime @default(now())
+}
