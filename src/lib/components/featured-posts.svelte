@@ -48,7 +48,7 @@
 
 <div class="flex flex-col gap-2">
 	<h1 class="text-3xl font-bold">Featured</h1>
-	<div class="flex h-full lg:max-h-[24rem] gap-2">
+	<div class="flex h-full gap-2 lg:max-h-[24rem]">
 		<ListPost
 			{...posts.featured[0]}
 			size="large"
@@ -58,7 +58,7 @@
 			date={null}
 			readTime={null}
 		/>
-		<div class="hidden lg:flex h-[24rem] w-2/5 flex-col justify-between">
+		<div class="hidden h-[24rem] w-2/5 flex-col justify-between lg:flex">
 			{#each posts.featured as post, i}
 				{#if i > 0}
 					<ListPost

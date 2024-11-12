@@ -52,7 +52,7 @@
 	];
 </script>
 
-<div class="my-5 flex justify-between px-2 flex-col lg:flex-row lg:px-0">
+<div class="my-5 flex flex-col justify-between px-2 lg:flex-row lg:px-0">
 	<div class="flex flex-col gap-3">
 		<h1 class="text-4xl font-bold">Onur Sedef</h1>
 		<p class="font-light">
@@ -63,7 +63,7 @@
 			<a
 				href="https://ottoo.com"
 				target="_blank"
-				class="font-bold text-blue-400 transition-all duration-75 hover:text-blue-600 hover:underline"
+				class="font-bold text-blue-600 dark:text-blue-400 transition-all duration-75 hover:text-blue-800 dark:hover:text-blue-600 hover:underline"
 				>Ottoo</a
 			>.<br />
 			✒️ Writing about software development, web technologies, and more.<br />
@@ -76,9 +76,9 @@
 	</div>
 </div>
 <div class="my-5 flex flex-col">
-	<div class="inline-flex w-full items-end justify-between py-3 px-3 lg:px-0">
+	<div class="inline-flex w-full items-end justify-between px-3 py-3 lg:px-0">
 		<h1 class="text-2xl font-bold">Latest Posts</h1>
-		<a href="/blog" class="text-sm font-light text-indigo-400">See More</a>
+		<a href="/blog" class="text-sm font-light text-indigo-800 dark:text-indigo-400">See More</a>
 	</div>
 	<div class="flex flex-col gap-3">
 		{#each posts as post}

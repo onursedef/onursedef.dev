@@ -27,42 +27,46 @@
 </script>
 
 {#if size === 'small'}
-	<div class="flex w-full items-center gap-2 hover:bg-slate-800/65 p-2 rounded-lg">
+	<div class="flex w-full items-center gap-2 rounded-lg p-2 hover:bg-slate-800/15 dark:hover:bg-slate-800/65">
 		<img src={image} alt="placeholder" class="h-20 w-24 flex-shrink-0 rounded-xl object-cover" />
 		<div>
-			<a aria-label="{title}" href={slug} class="line-clamp-2 text-lg font-bold hover:underline">{title}</a>
+			<a aria-label={title} href={slug} class="line-clamp-2 text-lg font-bold hover:underline"
+				>{title}</a
+			>
 			<p class="text-sm text-gray-500">Date</p>
 		</div>
 	</div>
 {:else if size === 'medium'}
-	<div class="flex flex-col lg:flex-row gap-3 rounded-lg p-2 transition-colors hover:bg-slate-800/65">
+	<div
+		class="flex flex-col gap-3 rounded-lg p-2 transition-colors hover:bg-slate-800/15 dark:hover:bg-slate-800/65 lg:flex-row"
+	>
 		<a href="" class="aspect-[3/2] h-28"
 			><img src={image} alt="placeholder" class="aspect-[3/2] rounded-lg object-cover" /></a
 		>
 		<div class="flex flex-col gap-2">
 			<div>
-				<a href={slug} class="text-lg font-bold line-clamp-2">
+				<a href={slug} class="line-clamp-2 text-lg font-bold">
 					{title}
 				</a>
 				<div class="inline-flex items-center gap-4 text-xs text-gray-500">
 					<p class=" text-gray-500">{category}</p>
-					<div class="hidden lg:inline-flex items-center gap-2">
+					<div class="hidden items-center gap-2 lg:inline-flex">
 						<Tags class="h-3 w-3" />
 						<p>{tags.map((tag: string) => tag).join(', ')}</p>
 					</div>
-					<div class="hidden lg:inline-flex items-center gap-2 text-gray-500">
+					<div class="hidden items-center gap-2 text-gray-500 lg:inline-flex">
 						<Eye class="h-3 w-3" />
 						<p>{views}</p>
 					</div>
-					<div class="hidden lg:inline-flex items-center gap-2 text-gray-500">
+					<div class="hidden items-center gap-2 text-gray-500 lg:inline-flex">
 						<p>{date}</p>
 					</div>
-					<div class="hidden lg:inline-flex items-center gap-2 text-gray-500">
+					<div class="hidden items-center gap-2 text-gray-500 lg:inline-flex">
 						<p>{readTime}</p>
 					</div>
 				</div>
 			</div>
-			<p class="line-clamp-3 lg:line-clamp-2 text-wrap text-sm">
+			<p class="line-clamp-3 text-wrap text-sm lg:line-clamp-2">
 				{description}
 			</p>
 		</div>
@@ -80,6 +84,10 @@
 				</div>
 			</div>
 		</div>
-		<img src={image} alt="placeholder" class="aspect-[3/2] lg:h-full w-full rounded-2xl object-cover" />
+		<img
+			src={image}
+			alt="placeholder"
+			class="aspect-[3/2] w-full rounded-2xl object-cover lg:h-full"
+		/>
 	</a>
 {/if}

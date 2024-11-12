@@ -9,18 +9,19 @@
 		<NowPlaying />
 		<div class="block h-px w-full bg-gray-400"></div>
 	</div>
-	<div class="grid gap-3 px-3 pb-3 md:grid-cols-2 lg:px-0 2xl:grid-cols-3">
+	<div class="grid gap-3 px-3 pb-3 md:grid-cols-2 lg:px-0 2xl:grid-cols-3 ">
 		<SocialCard
 			size="md"
-			background="bg-black/45"
+			background="bg-black dark:bg-black/45"
 			link="https://x.com/irukaga"
 			iconColor="fill-white"
-			titleBg="bg-white/50 hover:bg-white"
+			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
 			title="Follow Me"
 			titleColor="text-black"
 			description="@irukaga.dev"
 			border={true}
 			borderColor="border-black"
+			textColor={null}
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>X</title><path
@@ -30,15 +31,16 @@
 		</SocialCard>
 		<SocialCard
 			size="md"
-			background="bg-black/45"
+			background="bg-black dark:bg-black/45"
 			link="https://github.com/onursedef"
 			iconColor="fill-white"
-			titleBg="bg-white/50 hover:bg-white"
+			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
 			title="Follow Me"
 			titleColor="text-black"
 			description="@onursedef"
 			border={true}
 			borderColor="border-black"
+			textColor={null}
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>GitHub</title><path
@@ -48,15 +50,16 @@
 		</SocialCard>
 		<SocialCard
 			size="md"
-			background="bg-gradient-to-r from-[#53FC19]/45 to-black/45"
+			background="bg-gradient-to-r from-[#53FC19]/65 to-black dark:from-[#53FC19]/45 dark:to-black/45"
 			link="https://kick.com/irukaga"
 			iconColor="fill-white"
-			titleBg="bg-[#53FC19]/50 hover:bg-[#53FC19]"
+			titleBg="bg-[#53FC19]/85 dark:bg-[#53FC19]/50 hover:bg-[#53FC19]"
 			title="Follow Me"
 			titleColor="text-black"
 			description="@irukaga"
 			border={true}
 			borderColor="border-black"
+			textColor="text-black"
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>Kick</title><path
@@ -66,15 +69,16 @@
 		</SocialCard>
 		<SocialCard
 			size="md"
-			background="bg-black/45"
+			background="bg-black dark:bg-black/45"
 			link="https://medium.com/onursedef"
 			iconColor="fill-white"
-			titleBg="bg-white/50 hover:bg-white"
+			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
 			title="Follow Me"
 			titleColor="text-black"
 			description="@onursedef"
 			border={true}
 			borderColor="border-black"
+			textColor={null}
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>Medium</title><path
@@ -84,15 +88,16 @@
 		</SocialCard>
 		<SocialCard
 			size="md"
-			background="bg-gradient-to-r from-[#0A66C2]/45 to-black/45"
+			background="bg-gradient-to-r from-[#0A66C2]/75 to-black dark:from-[#0A66C2]/45 dark:to-black/45"
 			link="https://dev.to/onursedef"
 			iconColor="fill-white"
-			titleBg="bg-white/50 hover:bg-white"
+			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
 			title="Let's Connect"
 			titleColor="text-black"
 			description="@onursedef"
 			border={true}
 			borderColor="border-black"
+			textColor={null}
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>LinkedIn</title><path
@@ -102,15 +107,16 @@
 		</SocialCard>
 		<SocialCard
 			size="md"
-			background="bg-gradient-to-r from-[#FF0000]/45 to-black/45"
+			background="bg-gradient-to-r from-[#FF0000]/75 to-black dark:from-[#FF0000]/45 dark:to-black/45"
 			link="https://youtube.com/onursedef"
 			iconColor="fill-white"
-			titleBg="bg-[#FF0000]/50 hover:bg-[#FF0000]"
+			titleBg="bg-[#FF0000]/75 dark:bg-[#FF0000]/50 hover:bg-[#FF0000]"
 			title="Subscribe"
 			titleColor="text-white"
 			description="@onursedef"
 			border={true}
 			borderColor="border-black"
+			textColor={null}
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>YouTube</title><path

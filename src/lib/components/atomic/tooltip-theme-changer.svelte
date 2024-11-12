@@ -3,34 +3,19 @@
 	import { fade } from 'svelte/transition';
 	import { writable } from 'svelte/store';
 	import { Moon, Sun } from 'lucide-svelte';
-
-	const isDark = writable(false);
-
 	import { onMount } from 'svelte';
+	import { isDark } from '$lib/stores/uiStore';
 
 	const changeTheme = () => {
-		const html = document.querySelector('html');
-		if (html) {
-			if (html.classList.contains('dark')) {
-				html.classList.remove('dark');
-				html.classList.add('light');
-				isDark.set(false);
-			} else {
-				html.classList.remove('light');
-				html.classList.add('dark');
-				isDark.set(true);
-			}
-		}
-	};
-
-	onMount(() => {
-		const html = document.querySelector('html');
-		if (html && html.classList.contains('dark')) {
+		const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+		if (theme === 'light') {
+			document.documentElement.classList.add('dark');
 			isDark.set(true);
-		} else {
+		} else if (theme === 'dark') {
+			document.documentElement.classList.remove('dark');
 			isDark.set(false);
 		}
-	});
+	};
 
 	let rotating = false;
 
@@ -55,11 +40,11 @@
 </script>
 
 <button
-	on:click={handleClick}
+	onclick={handleClick}
 	use:melt={$trigger}
 	aria-roledescription="tooltip"
 	aria-label="Change Theme"
-	class="cursor-pointer rounded-lg border border-indigo-800/30 bg-indigo-600/30 p-3 transition-all hover:bg-indigo-600"
+	class="text-white  cursor-pointer rounded-lg border border-indigo-800/80 dark:border-indigo-800/30 bg-indigo-600/80 dark:bg-indigo-600/30 p-3 transition-all  hover:bg-indigo-600"
 >
 	{#if $isDark}
 		<div class:rotate={rotating}>

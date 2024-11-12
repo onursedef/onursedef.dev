@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { marked } from "marked";
-    import PlaceholderImage from '../../../assets/images/placeholder-1.jpg';
-    import Potrait from '../../../assets/images/potrait.jpg';
-	import { Eye, Tag } from "lucide-svelte";
+	import { marked } from 'marked';
+	import PlaceholderImage from '../../../assets/images/placeholder-1.jpg';
+	import Potrait from '../../../assets/images/potrait.jpg';
+	import { Eye, Tag } from 'lucide-svelte';
 
-    let postContent= `<h1 id="sample-markdown">Sample Markdown</h1>
+	let postContent = `<h1 id="sample-markdown">Sample Markdown</h1>
 <p>This is some basic, sample markdown.</p>
 <h2 id="second-heading">Second Heading</h2>
 <ul>
@@ -32,7 +32,7 @@
 <p><img src="http://placebear.com/200/200" alt="bears"></p>
 <p>The end ...</p>`;
 
-    let secondPostContent = `## **1. Şüphe ve Gizlilik Mekanikleri**
+	let secondPostContent = `## **1. Şüphe ve Gizlilik Mekanikleri**
 
 ### 1.1 Şüphe Barları
 
@@ -131,45 +131,67 @@
 
 - **Tanım**: Görevlerin bilgi güvenliği seviyeleri, erişim zorluklarını belirler.
 - **Detaylar**:
-    - Sunuculardan alınan yüksek güvenlikli veriler, daha karmaşık hackleme gerektirebilir.`
+    - Sunuculardan alınan yüksek güvenlikli veriler, daha karmaşık hackleme gerektirebilir.`;
 </script>
 
 <div class="flex flex-col gap-3">
-    <div class="flex flex-col gap-2">
-        <a href="/blog?category=technology" class="text-gray-300">Technology</a>
-        <h1 class="text-3xl font-bold">
-            Mekanikler
-        </h1>
-        <div class="flex flex-col gap-3">
-            <div class="flex gap-2 text-sm ">
-                <img src={Potrait} alt="Potrait" class="w-16 h-16 rounded-full object-cover" />
-                <div class="flex flex-col justify-between">
-                    <span class="font-semibold">Onur Sedef</span>
-                    <span class="text-xs text-gray-300">May 20, 2021</span>
-                    <span class="text-xs text-gray-300">5 min read</span>
-                </div>
-            </div>
-            <div class="inline-flex gap-2 items-center text-sm text-gray-300">
-                <div class="inline-flex gap-2 items-center">
-                    <Tag class="w-3 h-3" /> technology, sound
-                </div>
-                <div class="inline-flex gap-2 items-center">
-                    <Eye class="w-3 h-3" /> 4321
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-col gap-2">
-        <img src={PlaceholderImage} alt="Placeholder" class=" w-full aspect-[16/9] object-cover rounded-lg" />
-        <div class="inline-flex items-center justify-between overflow-x-auto">
-            <img src={PlaceholderImage} alt="Placeholder" class="h-[5.2rem] aspect-[16/9] object-cover rounded-md flex-shrink-0" />
-            <img src={PlaceholderImage} alt="Placeholder" class="h-[5.2rem] aspect-[16/9] object-cover rounded-md flex-shrink-0" />
-            <img src={PlaceholderImage} alt="Placeholder" class="h-[5.2rem] aspect-[16/9] object-cover rounded-md flex-shrink-0" />
-            <img src={PlaceholderImage} alt="Placeholder" class="h-[5.2rem] aspect-[16/9] object-cover rounded-md flex-shrink-0" />
-            <img src={PlaceholderImage} alt="Placeholder" class="h-[5.2rem] aspect-[16/9] object-cover rounded-md flex-shrink-0" />
-        </div>
-    </div>
-    <div class="prose text-white prose-headings:text-white prose-strong:text-white leading-tight">
-        {@html marked(secondPostContent)}
-    </div>
+	<div class="flex flex-col gap-2">
+		<a href="/blog?category=technology" class="text-gray-600 dark:text-gray-300">Technology</a>
+		<h1 class="text-3xl font-bold">Mekanikler</h1>
+		<div class="flex flex-col gap-3">
+			<div class="flex gap-2 text-sm">
+				<img src={Potrait} alt="Potrait" class="h-16 w-16 rounded-full object-cover" />
+				<div class="flex flex-col justify-between">
+					<span class="font-semibold">Onur Sedef</span>
+					<span class="text-xs text-gray-600 dark:text-gray-300">May 20, 2021</span>
+					<span class="text-xs text-gray-600 dark:text-gray-300">5 min read</span>
+				</div>
+			</div>
+			<div class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+				<div class="inline-flex items-center gap-2">
+					<Tag class="h-3 w-3" /> technology, sound
+				</div>
+				<div class="inline-flex items-center gap-2">
+					<Eye class="h-3 w-3" /> 4321
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="flex flex-col gap-2">
+		<img
+			src={PlaceholderImage}
+			alt="Placeholder"
+			class=" aspect-[16/9] w-full rounded-lg object-cover"
+		/>
+		<div class="inline-flex items-center justify-between overflow-x-auto">
+			<img
+				src={PlaceholderImage}
+				alt="Placeholder"
+				class="aspect-[16/9] h-[5.2rem] flex-shrink-0 rounded-md object-cover"
+			/>
+			<img
+				src={PlaceholderImage}
+				alt="Placeholder"
+				class="aspect-[16/9] h-[5.2rem] flex-shrink-0 rounded-md object-cover"
+			/>
+			<img
+				src={PlaceholderImage}
+				alt="Placeholder"
+				class="aspect-[16/9] h-[5.2rem] flex-shrink-0 rounded-md object-cover"
+			/>
+			<img
+				src={PlaceholderImage}
+				alt="Placeholder"
+				class="aspect-[16/9] h-[5.2rem] flex-shrink-0 rounded-md object-cover"
+			/>
+			<img
+				src={PlaceholderImage}
+				alt="Placeholder"
+				class="aspect-[16/9] h-[5.2rem] flex-shrink-0 rounded-md object-cover"
+			/>
+		</div>
+	</div>
+	<div class="prose leading-tight dark:text-white dark:prose-headings:text-white dark:prose-strong:text-white">
+		{@html marked(secondPostContent)}
+	</div>
 </div>

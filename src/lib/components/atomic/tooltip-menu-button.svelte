@@ -43,7 +43,7 @@
 	onclick={toggleModal}
 	aria-roledescription="tooltip"
 	aria-label="Open Menu"
-	class="cursor-pointer rounded-lg border border-indigo-800/30 bg-indigo-600/30 p-3 transition-all hover:bg-indigo-600"
+	class="text-white cursor-pointer rounded-lg border border-indigo-800/80 dark:border-indigo-800/30 bg-indigo-600/80 dark:bg-indigo-600/30 p-3 transition-all hover:bg-indigo-600"
 >
 	<Command class="aspect-1 w-5" />
 </button>
