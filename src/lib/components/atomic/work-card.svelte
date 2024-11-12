@@ -25,11 +25,11 @@
         <div class="inline-flex justify-between items-center">
             <h3 class="text-lg font-bold">{title}</h3>
             <div class="inline-flex gap-5 items-center mt-1">
-                <a href="{githubLink}" class="fill-white w-8 h-8 hover:fill-gray-300 transition-colors">
+                <a href="{githubLink}" class="fill-white w-5 h-5 hover:fill-gray-300 transition-colors">
                      <Github />
                 </a>
                 <a href="{webLink}">
-                    <ExternalLink class="w-8 h-8 text-white hover:text-gray-300 transition-colors" />
+                    <ExternalLink class="w-5 h-5 text-white hover:text-gray-300 transition-colors" />
                 </a>
             </div>
         </div>
