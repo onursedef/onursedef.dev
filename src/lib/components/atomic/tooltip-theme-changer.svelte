@@ -1,28 +1,15 @@
 <script lang="ts">
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import { fade } from 'svelte/transition';
-	import { writable } from 'svelte/store';
 	import { Moon, Sun } from 'lucide-svelte';
-	import { onMount } from 'svelte';
-	import { isDark } from '$lib/stores/uiStore';
-
-	const changeTheme = () => {
-		const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-		if (theme === 'light') {
-			document.documentElement.classList.add('dark');
-			isDark.set(true);
-		} else if (theme === 'dark') {
-			document.documentElement.classList.remove('dark');
-			isDark.set(false);
-		}
-	};
-
+	import { theme } from '$lib/stores/theme';
+	
 	let rotating = false;
-
+	
 	const handleClick = () => {
 		rotating = true;
 		setTimeout(() => (rotating = false), 500);
-		changeTheme();
+		theme.update((value) => value === 'dark' ? 'light' : 'dark');
 	};
 
 	const {
@@ -46,7 +33,7 @@
 	aria-label="Change Theme"
 	class="cursor-pointer rounded-lg border border-indigo-800/80 bg-indigo-600/80 p-3 text-white transition-all hover:bg-indigo-600 dark:border-indigo-800/30 dark:bg-indigo-600/30"
 >
-	{#if $isDark}
+	{#if $theme === 'dark'}
 		<div class:rotate={rotating}>
 			<Sun class="aspect-1 w-5" />
 		</div>
@@ -65,7 +52,7 @@
 	>
 		<div use:melt={$arrow}></div>
 		<p class="px-2 py-1 text-sm text-white">
-			{#if $isDark}
+			{#if $theme === 'dark'}
 				Light Theme
 			{:else}
 				Dark Theme
