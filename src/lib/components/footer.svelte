@@ -59,7 +59,7 @@
 			description="@irukaga"
 			border={true}
 			borderColor="border-black"
-			textColor="text-black"
+			textColor="dark:text-white text-black"
 		>
 			<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
 				><title>Kick</title><path
