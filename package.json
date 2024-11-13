@@ -2,6 +2,12 @@
 	"name": "onursedef.dev",
 	"version": "0.0.1",
 	"type": "module",
+	"husky": {
+		"hooks": {
+			"format": "bun format",
+			"pre-commit": "bun check"
+		}
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
