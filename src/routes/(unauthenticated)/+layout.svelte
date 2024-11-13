@@ -1,10 +1,9 @@
 <script lang="ts">
-	import Navbar from './../lib/components/navbar.svelte';
+	import Navbar from './../../lib/components/navbar.svelte';
 	import Footer from '$lib/components/footer.svelte';
 
 	import '../app.css';
 	import MenuModal from '$lib/components/menu-modal.svelte';
-	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
