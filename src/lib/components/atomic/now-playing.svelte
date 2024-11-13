@@ -8,45 +8,6 @@
 	var songArtist = $state();
 	var songAlbum = $state();
 
-	const getNowPlaying = async () => {
-		var body = new URLSearchParams();
-		body.append('grant_type', 'client_credentials');
-		body.append('client_id', 'f327ea84f5ad48d5b1a25513f33af0e6');
-		body.append('client_secret', '0f15ba7712e744c4808d5fa9a6f7dd9d');
-
-		var request = await fetch('https://accounts.spotify.com/api/token', {
-			method: 'POST',
-			body: body,
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}
-		});
-
-		var response = await request.json();
-		console.log(response);
-		accessToken = response.access_token;
-
-		request = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
-			headers: {
-				Authorization: `Bearer ${accessToken}`
-			}
-		});
-
-		response = await request.json();
-
-		songCover = response.item.album.images[0].url;
-		songName = response.item.name;
-		if (response.item.artists.length > 1) {
-			songArtist = response.item.artists.map((artist: any) => artist.name).join(', ');
-		} else {
-			songArtist = response.item.artists[0].name;
-		}
-
-		songAlbum = response.item.album.name;
-	};
-
-	// getNowPlaying();
-
 	const {
 		elements: { trigger, content, arrow },
 		states: { open }
