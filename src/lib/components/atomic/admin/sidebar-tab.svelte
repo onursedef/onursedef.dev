@@ -42,11 +42,9 @@
         </div>
         <div class="flex flex-col gap-2 w-full transition-all duration-300 overflow-hidden items-start {$isDropdownOpen ? 'max-h-screen-2xl opacity-100' : 'h-0 max-h-0 opacity-0'}">
             {#each items as item}
-                <div class="pl-14 text-sm transition-colors hover:bg-slate-600 rounded-e-md px-4 py-2 w-full text-left {item.active ? 'bg-slate-600' : ''}">
-                    <a href="{item?.href}" class="w-full h-full cursor-pointer">
-                        <span>{item.title}</span>
-                    </a>
-                </div>
+                <a href="{item?.href}" class="pl-14 text-sm transition-colors hover:bg-slate-600 rounded-e-md px-4 py-2 w-full text-left {item.active ? 'bg-slate-600' : ''} w-full h-full cursor-pointer">
+                    <span>{item.title}</span>
+                </a>
             {/each}
         </div>
     </button>

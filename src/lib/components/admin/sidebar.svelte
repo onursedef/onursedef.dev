@@ -21,7 +21,7 @@
         {
             title: 'Blog',
             active: false,
-            href: '/admin',
+            href: '',
             items: [
                 {
                     title: 'Posts',
