@@ -63,7 +63,7 @@
 			<a
 				href="https://ottoo.com"
 				target="_blank"
-				class="font-bold text-blue-600 dark:text-blue-400 transition-all duration-75 hover:text-blue-800 dark:hover:text-blue-600 hover:underline"
+				class="font-bold text-blue-600 transition-all duration-75 hover:text-blue-800 hover:underline dark:text-blue-400 dark:hover:text-blue-600"
 				>Ottoo</a
 			>.<br />
 			✒️ Writing about software development, web technologies, and more.<br />

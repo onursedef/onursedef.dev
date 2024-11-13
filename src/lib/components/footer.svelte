@@ -9,7 +9,7 @@
 		<NowPlaying />
 		<div class="block h-px w-full bg-gray-400"></div>
 	</div>
-	<div class="grid gap-3 px-3 pb-3 md:grid-cols-2 lg:px-0 2xl:grid-cols-3 ">
+	<div class="grid gap-3 px-3 pb-3 md:grid-cols-2 lg:px-0 2xl:grid-cols-3">
 		<SocialCard
 			size="md"
 			background="bg-black dark:bg-black/45"

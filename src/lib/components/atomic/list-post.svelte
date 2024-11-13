@@ -27,7 +27,9 @@
 </script>
 
 {#if size === 'small'}
-	<div class="flex w-full items-center gap-2 rounded-lg p-2 hover:bg-slate-800/15 dark:hover:bg-slate-800/65">
+	<div
+		class="flex w-full items-center gap-2 rounded-lg p-2 hover:bg-slate-800/15 dark:hover:bg-slate-800/65"
+	>
 		<img src={image} alt="placeholder" class="h-20 w-24 flex-shrink-0 rounded-xl object-cover" />
 		<div>
 			<a aria-label={title} href={slug} class="line-clamp-2 text-lg font-bold hover:underline"
@@ -38,7 +40,7 @@
 	</div>
 {:else if size === 'medium'}
 	<div
-		class="flex flex-col gap-3 rounded-lg p-2 transition-colors hover:bg-slate-800/15 dark:hover:bg-slate-800/65 lg:flex-row"
+		class="flex flex-col gap-3 rounded-lg p-2 transition-colors hover:bg-slate-800/15 lg:flex-row dark:hover:bg-slate-800/65"
 	>
 		<a href="" class="aspect-[3/2] h-28"
 			><img src={image} alt="placeholder" class="aspect-[3/2] rounded-lg object-cover" /></a

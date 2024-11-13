@@ -40,7 +40,9 @@
 				class="{titleBg} cursor-pointer select-none rounded-2xl px-3 py-1 text-left text-sm transition-colors {titleColor}"
 				>{title}</a
 			>
-			<p class="select-none text-left text-sm {textColor !== null ? textColor : 'text-white'}">{description}</p>
+			<p class="select-none text-left text-sm {textColor !== null ? textColor : 'text-white'}">
+				{description}
+			</p>
 		</div>
 		<div class="absolute right-1 h-28 w-28 rounded-lg {iconColor}">
 			{@render children()}

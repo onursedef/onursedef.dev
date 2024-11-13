@@ -6,7 +6,6 @@
 	import { writable } from 'svelte/store';
 	import { isDark } from '$lib/stores/uiStore';
 	import { fade } from 'svelte/transition';
-
 </script>
 
 <nav class="flex flex-row justify-between px-3 py-5">

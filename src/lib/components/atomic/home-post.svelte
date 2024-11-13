@@ -4,7 +4,10 @@
 	export let post;
 </script>
 
-<a href="#" class="flex w-full flex-1 gap-3 rounded-lg p-3 transition-colors hover:bg-slate-800/15 dark:hover:bg-slate-800/65">
+<a
+	href="#"
+	class="flex w-full flex-1 gap-3 rounded-lg p-3 transition-colors hover:bg-slate-800/15 dark:hover:bg-slate-800/65"
+>
 	<img src={post.image_url} alt={post.title} class="w-48 rounded-lg object-cover" />
 	<div class="flex w-4/5 flex-col gap-2">
 		<h1 class="text-wrap text-lg font-bold">{post.title}</h1>

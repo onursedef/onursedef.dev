@@ -191,7 +191,9 @@
 			/>
 		</div>
 	</div>
-	<div class="prose leading-tight dark:text-white dark:prose-headings:text-white dark:prose-strong:text-white">
+	<div
+		class="prose leading-tight dark:text-white dark:prose-headings:text-white dark:prose-strong:text-white"
+	>
 		{@html marked(secondPostContent)}
 	</div>
 </div>

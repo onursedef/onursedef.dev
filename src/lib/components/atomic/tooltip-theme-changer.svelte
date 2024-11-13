@@ -44,7 +44,7 @@
 	use:melt={$trigger}
 	aria-roledescription="tooltip"
 	aria-label="Change Theme"
-	class="text-white  cursor-pointer rounded-lg border border-indigo-800/80 dark:border-indigo-800/30 bg-indigo-600/80 dark:bg-indigo-600/30 p-3 transition-all  hover:bg-indigo-600"
+	class="cursor-pointer rounded-lg border border-indigo-800/80 bg-indigo-600/80 p-3 text-white transition-all hover:bg-indigo-600 dark:border-indigo-800/30 dark:bg-indigo-600/30"
 >
 	{#if $isDark}
 		<div class:rotate={rotating}>
