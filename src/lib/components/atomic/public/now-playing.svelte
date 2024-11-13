@@ -49,7 +49,7 @@
 		/>
 	</div>
 	<div class="flex w-full flex-col justify-center overflow-hidden">
-		<span class="text-xs font-light text-gray-300">Now Playing:</span>
+		<span class="text-xs font-light text-gray-700 dark:text-gray-300">Now Playing:</span>
 		<span class="truncate text-sm font-bold">Sana Güvenmiyorum - Dedub Sessions</span>
 		<span class="text-sm">Dedublüman, Aleyna Tilki</span>
 	</div>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { ExternalLink } from 'lucide-svelte';
-	import Github from './icons/github.svelte';
+	import Github from '../icons/github.svelte';
 
 	let { image, title, category, description, githubLink, webLink } = $props<{
 		image: string;

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { marked } from 'marked';
-	import PlaceholderImage from '../../../assets/images/placeholder-1.jpg';
-	import Potrait from '../../../assets/images/potrait.jpg';
+	import PlaceholderImage from '../../../../assets/images/placeholder-1.jpg';
+	import Potrait from '../../../../assets/images/potrait.jpg';
 	import { Eye, Tag } from 'lucide-svelte';
 
 	let postContent = `<h1 id="sample-markdown">Sample Markdown</h1>

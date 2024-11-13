@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Placeholder1 from '../../assets/images/placeholder-1.jpg';
-	import ListPost from './atomic/list-post.svelte';
+	import Placeholder1 from '../../../assets/images/placeholder-1.jpg';
+	import ListPost from '../atomic/public/list-post.svelte';
 
 	let posts = {
 		featured: [

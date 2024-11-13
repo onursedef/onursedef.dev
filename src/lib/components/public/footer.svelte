@@ -1,6 +1,6 @@
 <script>
-	import NowPlaying from './atomic/now-playing.svelte';
-	import SocialCard from './atomic/social-card.svelte';
+	import NowPlaying from '../atomic/public/now-playing.svelte';
+	import SocialCard from '../atomic/public/social-card.svelte';
 </script>
 
 <footer class="w-full">
@@ -92,7 +92,7 @@
 			link="https://linkedin.com/onursedef"
 			iconColor="fill-white"
 			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
-			title="Let's Connect"
+			title="Connect"
 			titleColor="text-black"
 			description="@onursedef"
 			border={true}

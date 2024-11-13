@@ -1,8 +1,8 @@
 <script lang="ts">
-	import logo from '../../assets/images/logo.svg';
-	import logoBlack from '../../assets/images/logo-black.svg';
-	import TooltipMenuButton from './atomic/tooltip-menu-button.svelte';
-	import TooltipThemeChanger from './atomic/tooltip-theme-changer.svelte';
+	import logo from '../../../assets/images/logo.svg';
+	import logoBlack from '../../../assets/images/logo-black.svg';
+	import TooltipMenuButton from '../atomic/public/tooltip-menu-button.svelte';
+	import TooltipThemeChanger from '../atomic/public/tooltip-theme-changer.svelte';
 	import { theme } from '$lib/stores/theme';
 </script>
 

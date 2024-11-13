@@ -1,6 +1,6 @@
 <script>
-	import Computer_3d from '$lib/components/atomic/computer-3d.svelte';
-	import HomePost from '$lib/components/atomic/home-post.svelte';
+	import Computer_3d from '$lib/components/atomic/public/computer-3d.svelte';
+	import HomePost from '$lib/components/atomic/public/home-post.svelte';
 	import { Canvas } from '@threlte/core';
 
 	const posts = [
@@ -52,6 +52,9 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Onur Sedef</title>
+</svelte:head>
 <div class="my-5 flex flex-col justify-between px-2 lg:flex-row lg:px-0">
 	<div class="flex flex-col gap-3">
 		<h1 class="text-4xl font-bold">Onur Sedef</h1>

@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { Eye, Menu, Tags } from 'lucide-svelte';
-	import Placeholder1 from '../../assets/images/placeholder-1.jpg';
-	import CategoryChip from './atomic/category-chip.svelte';
-	import ListPost from './atomic/list-post.svelte';
+	import Placeholder1 from '../../../assets/images/placeholder-1.jpg';
+	import CategoryChip from '../atomic/public/category-chip.svelte';
+	import ListPost from '../atomic/public/list-post.svelte';
 	import { createDropdownMenu, melt } from '@melt-ui/svelte';
-	import CategoryDropdown from './atomic/category-dropdown.svelte';
+	import CategoryDropdown from '../atomic/public/category-dropdown.svelte';
 
 	let posts = {
 		featured: [

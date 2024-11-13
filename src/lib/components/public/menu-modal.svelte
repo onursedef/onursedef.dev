@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { menuOpen } from '$lib/stores/uiStore';
-	import { Circle, File, Link, Search, X } from 'lucide-svelte';
-	import Logo from '../../assets/images/logo.svg';
+	import { Circle, File, Search, X } from 'lucide-svelte';
+	import Logo from '../../../assets/images/logo.svg';
 	import { fade, scale } from 'svelte/transition';
 
 	$effect(() => {

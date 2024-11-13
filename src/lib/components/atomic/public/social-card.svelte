@@ -34,7 +34,7 @@
 		: ''} overflow-hidden"
 >
 	<div class="flex h-full w-full items-center justify-between px-3">
-		<div class="flex flex-col items-center gap-1 text-left">
+		<div class="flex flex-col items-start gap-1 text-left">
 			<a
 				href={link}
 				class="{titleBg} cursor-pointer select-none rounded-2xl px-3 py-1 text-left text-sm transition-colors {titleColor}"

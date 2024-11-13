@@ -17,6 +17,9 @@
     }
 </script>
 
+<svelte:head>
+    <title>Login</title>
+</svelte:head>
 <div class="flex flex-col max-w-96 w-fit xl:w-1/4 h-fit bg-slate-700 p-6 rounded-2xl font-jetbrains shadow-lg">
     <h2 class="text-2xl font-bold">Login</h2>
     <div class="flex flex-col gap-3 mt-6">

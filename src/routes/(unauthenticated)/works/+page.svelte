@@ -1,8 +1,8 @@
 <script lang="ts">
-	import CategoryChip from '$lib/components/atomic/category-chip.svelte';
-	import Placeholder from '../../assets/images/placeholder-1.jpg';
-	import WorkCard from '$lib/components/atomic/work-card.svelte';
-	import CategoryDropdown from '$lib/components/atomic/category-dropdown.svelte';
+	import CategoryChip from '$lib/components/atomic/public/category-chip.svelte';
+	import Placeholder from '../../../assets/images/placeholder-1.jpg';
+	import WorkCard from '$lib/components/atomic/public/work-card.svelte';
+	import CategoryDropdown from '$lib/components/atomic/public/category-dropdown.svelte';
 
 	const categories = [
 		{
