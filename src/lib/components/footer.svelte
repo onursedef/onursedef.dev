@@ -89,7 +89,7 @@
 		<SocialCard
 			size="md"
 			background="bg-gradient-to-r from-[#0A66C2]/75 to-black dark:from-[#0A66C2]/45 dark:to-black/45"
-			link="https://dev.to/onursedef"
+			link="https://linkedin.com/onursedef"
 			iconColor="fill-white"
 			titleBg="bg-white/75 dark:bg-white/50 hover:bg-white"
 			title="Let's Connect"
