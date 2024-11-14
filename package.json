@@ -23,7 +23,8 @@
 		"db:pull": "prisma db pull",
 		"db:push": "prisma db push",
 		"db:validate": "prisma validate",
-		"db:resef": "prisma format"
+		"db:resef": "prisma format",
+		"prepare": "husky"
 	},
 	"devDependencies": {
 		"@melt-ui/pp": "^0.3.2",
