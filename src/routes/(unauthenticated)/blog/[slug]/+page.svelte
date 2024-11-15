@@ -2,7 +2,11 @@
 	import { marked } from 'marked';
 	import PlaceholderImage from '../../../../assets/images/placeholder-1.jpg';
 	import Potrait from '../../../../assets/images/potrait.jpg';
-	import { Eye, Tag } from 'lucide-svelte';
+	import { ChevronDown, Eye, Tag } from 'lucide-svelte';
+	import { createTableOfContents, melt } from '@melt-ui/svelte';
+	import { pushState } from '$app/navigation';
+	import TableOfContents from '$lib/components/atomic/public/table-of-contents.svelte';
+	import { writable } from 'svelte/store';
 
 	let postContent = `<h1 id="sample-markdown">Sample Markdown</h1>
 <p>This is some basic, sample markdown.</p>
@@ -132,9 +136,73 @@
 - **Tanım**: Görevlerin bilgi güvenliği seviyeleri, erişim zorluklarını belirler.
 - **Detaylar**:
     - Sunuculardan alınan yüksek güvenlikli veriler, daha karmaşık hackleme gerektirebilir.`;
+
+	const {
+		elements: { item },
+		states: { activeHeadingIdxs, headingsTree }
+	} = createTableOfContents({
+		selector: '#post-content',
+		activeType: 'all',
+		/**
+		 * Here we can optionally provide SvelteKit's `pushState` function.
+		 * This function preserve navigation state within the framework.
+		 */
+		pushStateFn: pushState,
+		headingFilterFn: (heading) => !heading.hasAttribute('data-toc-ignore'),
+		scrollFn: (id) => {
+			/**
+			 * Here we're overwriting the default scroll function
+			 * so that we only scroll within the ToC preview
+			 * container, instead of the entire page.
+			 */
+			const container = document.getElementById('post-content');
+			const element = document.getElementById(id);
+
+			if (container && element) {
+				container.scrollTo({
+					top: element.offsetTop - container.offsetTop - 16,
+					behavior: 'smooth'
+				});
+			}
+		}
+	});
+
+	let dropdownOpen = writable(false);
+
+	const toggleDropdown = () => {
+		dropdownOpen.update((prev) => !prev);
+	};
 </script>
 
-<div class="flex flex-col gap-3">
+<div class="relative flex flex-col gap-3 px-3">
+	<div class="xl:sticky xl:top-4">
+		<div
+			class="xl:absolute xl:-right-[18.5rem] 2xl:-right-96 {$dropdownOpen
+				? 'overflow-y-auto'
+				: 'overflow-hidden'} rounded-lg bg-slate-400 p-4 transition-all duration-300 ease-in-out lg:overflow-y-auto dark:bg-slate-700 {$dropdownOpen
+				? 'h-max'
+				: 'h-12'} max-h-96 overflow-x-hidden text-ellipsis lg:h-max xl:max-w-72 2xl:max-w-80"
+		>
+			<div class="inline-flex w-full items-center justify-between">
+				<p class="text-white-900 font-semibold">Table of contents</p>
+				<button
+					onclick={toggleDropdown}
+					class="rounded-full p-1 transition-colors hover:bg-slate-400 xl:hidden"
+				>
+					<ChevronDown
+						class="text-white-900 h-4 w-4 transition-all duration-200 {$dropdownOpen
+							? 'rotate-180'
+							: 'rotate-0'}"
+					/>
+				</button>
+			</div>
+			<nav>
+				{#key $headingsTree}
+					<TableOfContents tree={$headingsTree} activeHeadingIdxs={$activeHeadingIdxs} {item} />
+				{/key}
+			</nav>
+		</div>
+	</div>
 	<div class="flex flex-col gap-2">
 		<a href="/blog?category=technology" class="text-gray-600 dark:text-gray-300">Technology</a>
 		<h1 class="text-3xl font-bold">Mekanikler</h1>
@@ -192,6 +260,7 @@
 		</div>
 	</div>
 	<div
+		id="post-content"
 		class="prose leading-tight dark:text-white dark:prose-headings:text-white dark:prose-strong:text-white"
 	>
 		{@html marked(secondPostContent)}
