@@ -78,8 +78,8 @@
 				: 'h-0 max-h-0 opacity-0'}"
 		>
 			{#each items as item}
-				<div
-					onclick={() => setOptions(item.href)}
+				<a
+					href="{item.href}"
 					class="w-full rounded-e-md px-4 py-2 pl-14 text-left text-sm transition-colors hover:bg-slate-600 {item.active
 						? 'bg-slate-500'
 						: ''} h-full w-full cursor-pointer"
@@ -87,7 +87,7 @@
 					tabindex="0"
 				>
 					<span>{item.title}</span>
-				</div>
+				</a>
 			{/each}
 		</div>
 	</button>
