@@ -8,7 +8,7 @@
 	let { children } = $props();
 </script>
 
-<div class="relative ml-auto mr-auto max-w-2xl 2xl:max-w-3xl font-jetbrains">
+<div class="relative ml-auto mr-auto max-w-2xl font-jetbrains 2xl:max-w-3xl">
 	<Navbar />
 	<main class="@container">
 		{@render children()}

@@ -3,7 +3,6 @@
 	import LatestPosts from '$lib/components/public/latest-posts.svelte';
 </script>
 
-
 <svelte:head>
 	<title>Onur Sedef - Blog</title>
 </svelte:head>

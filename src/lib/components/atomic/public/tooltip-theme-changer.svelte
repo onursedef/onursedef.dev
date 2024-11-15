@@ -3,13 +3,13 @@
 	import { fade } from 'svelte/transition';
 	import { Moon, Sun } from 'lucide-svelte';
 	import { theme } from '$lib/stores/theme';
-	
+
 	let rotating = false;
-	
+
 	const handleClick = () => {
 		rotating = true;
 		setTimeout(() => (rotating = false), 500);
-		theme.update((value) => value === 'dark' ? 'light' : 'dark');
+		theme.update((value) => (value === 'dark' ? 'light' : 'dark'));
 	};
 
 	const {

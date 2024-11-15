@@ -12,7 +12,7 @@
 		theme.subscribe((value) => {
 			logoSrc.set(value === 'dark' ? logo : logoBlack);
 		});
-	})
+	});
 </script>
 
 <nav class="flex flex-row justify-between px-3 py-5">
