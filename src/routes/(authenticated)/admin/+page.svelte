@@ -20,6 +20,9 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Onur Sedef - Dashboard</title>
+</svelte:head>
 <div class="grid grid-cols-2 gap-3">
 	<div class="flex w-full flex-col gap-3 border border-slate-700 bg-slate-800 p-3">
 		<div class="inline-flex items-start justify-between">
