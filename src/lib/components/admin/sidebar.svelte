@@ -109,16 +109,16 @@
 	</div>
 	<div class="flex flex-col gap-2">
 		{#each tabs as tab}
-					<SidebarTab
-					title={tab.title}
-					active={tab.active}
-					href={tab.href}
-					items={tab.items}
-					sidebarOpen={$isSidebarOpen}
-					path={path}
-				>
-					<svelte:component this={tab.icon} class="h-6 w-6" />
-				</SidebarTab>
+			<SidebarTab
+				title={tab.title}
+				active={tab.active}
+				href={tab.href}
+				items={tab.items}
+				sidebarOpen={$isSidebarOpen}
+				{path}
+			>
+				<svelte:component this={tab.icon} class="h-6 w-6" />
+			</SidebarTab>
 		{/each}
 	</div>
 </div>

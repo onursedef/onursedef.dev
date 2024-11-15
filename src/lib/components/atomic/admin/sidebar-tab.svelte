@@ -79,7 +79,7 @@
 		>
 			{#each items as item}
 				<a
-					href="{item.href}"
+					href={item.href}
 					class="w-full rounded-e-md px-4 py-2 pl-14 text-left text-sm transition-colors hover:bg-slate-600 {item.active
 						? 'bg-slate-500'
 						: ''} h-full w-full cursor-pointer"
@@ -93,7 +93,7 @@
 	</button>
 {:else}
 	<button
-		onclick="{() => setOptions(href)}"
+		onclick={() => setOptions(href)}
 		class="flex flex-col items-start gap-2 rounded-e-md py-3 transition-colors hover:bg-slate-700 {sidebarOpen
 			? 'w-56'
 			: 'w-14'}  {active ? 'bg-slate-600' : ''}"
