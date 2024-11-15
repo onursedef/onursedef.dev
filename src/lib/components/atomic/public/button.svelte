@@ -13,7 +13,7 @@ import SuccessButton from "./success-button.svelte";
         loading,
         children,
     } = $props<{
-        onclick: () => void;
+        onclick?: () => void | Promise<void>;
         type: 'success' | 'danger' | 'warning' | 'info' | 'primary' | 'secondary';
         disabled: boolean;
         loading: boolean;
@@ -22,15 +22,15 @@ import SuccessButton from "./success-button.svelte";
 </script>
 
 {#if type === 'success'}
-    <SuccessButton {onclick} {disabled} {loading}>{children}</SuccessButton>
+    <SuccessButton {onclick} {disabled} {loading}>{@render children()}</SuccessButton>
 {:else if type === 'danger'}
-    <DangerButton {onclick} {disabled} {loading}>{children}</DangerButton>
+    <DangerButton {onclick} {disabled} {loading}>{@render children()}</DangerButton>
 {:else if type === 'warning'}
-    <WarningButton {onclick} {disabled} {loading}>{children}</WarningButton>
+    <WarningButton {onclick} {disabled} {loading}>{@render children()}</WarningButton>
 {:else if type === 'info'}
-    <InfoButton {onclick} {disabled} {loading}>{children}</InfoButton>
+    <InfoButton {onclick} {disabled} {loading}>{@render children()}</InfoButton>
 {:else if type === 'secondary'}
-    <SecondaryButton {onclick} {disabled} {loading}>{children}</SecondaryButton>
+    <SecondaryButton {onclick} {disabled} {loading}>{@render children()}</SecondaryButton>
 {:else}
-    <PrimaryButton {onclick} {disabled} {loading}>{children}</PrimaryButton>
+    <PrimaryButton {onclick} {disabled} {loading}>{@render children()}</PrimaryButton>
 {/if}
