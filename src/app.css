@@ -8,7 +8,7 @@
 @layer base {
 	html,
 	body {
-		@apply bg-slate-300 font-inter text-black dark:bg-slate-900 dark:text-white;
+		@apply scroll-smooth bg-slate-300 font-inter text-black dark:bg-slate-900 dark:text-white;
 	}
 	::-webkit-scrollbar {
 		@apply w-2 bg-slate-800/65;
