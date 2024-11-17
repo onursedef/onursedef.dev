@@ -4,7 +4,7 @@
 </script>
 
 <div class="flex h-20 w-full items-center border-b-2 border-slate-600 bg-slate-800 shadow-lg">
-	<div class="mx-auto inline-flex w-full max-w-4xl items-center justify-between">
+	<div class="mx-auto inline-flex w-full max-w-6xl items-center justify-between">
 		<div class="inline-flex items-center gap-2 rounded-md border-2 border-slate-600 px-2">
 			<Search class="h-5 w-5 text-slate-400" />
 			<input

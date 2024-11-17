@@ -13,7 +13,7 @@
 	<Sidebar />
 	<div class="flex w-full flex-col gap-3">
 		<Navbar />
-		<div class="mx-auto w-full max-w-4xl py-5">
+		<div class="mx-auto w-full max-w-6xl py-5">
 			{@render children()}
 		</div>
 	</div>
