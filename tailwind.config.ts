@@ -15,19 +15,6 @@ export default {
       fontFamily: {
         jetbrains: ["JetBrains Mono Variable", "monospace"],
       },
-      typography: ({ theme }) => {
-        return {
-          DEFAULT: {
-            css: {
-              '.prose-pre\\:p-0': {
-                '&:is(:where(pre):not(:where([class~="shiki"],[class~="nord"],[class~="not-prose"],[class~="not-prose"] *)))': {
-                  padding: 0,
-                }
-              }
-            }
-          }
-        }
-      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
