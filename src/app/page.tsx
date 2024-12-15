@@ -52,7 +52,7 @@ export const metadata = {
 }
 
 export default async function Home() {
-  const data = await fetch('http://localhost:3000/api/posts');
+  const data = await fetch(`${process.env.APP_URL}/api/posts`);
   const posts: Posts = await data.json();
   return (
     <DefaultLayout

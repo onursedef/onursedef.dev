@@ -46,7 +46,7 @@ export const metadata = {
 };
 
 export default async function Projects() {
-    const data = await fetch('http://localhost:3000/api/projects');
+    const data = await fetch(`${process.env.APP_URL}/api/projects`);
     const projects: Projects = await data.json();
     return (
         <DefaultLayout isHome={false} title={'Projects'}>

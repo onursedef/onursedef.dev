@@ -7,7 +7,7 @@ import TurndownService from "turndown";
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const apiEndpoint = process.env.API_ENDPOINT;
-    const apiKey = await fetch('http://localhost:3000/api/auth', {
+    const apiKey = await fetch(`${process.env.APP_URL}/api/auth`, {
         method: 'POST'
     }).then(res => res.json()).then(data => data.authToken);
 

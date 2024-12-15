@@ -9,7 +9,7 @@ export async function generateMetadata({
 }: { params: Promise<{ slug: string }> },
     parent: ResolvingMetadata): Promise<Metadata> {
     const { slug } = await params;
-    const data = await fetch(`http://localhost:3000/api/posts/${slug}`);
+    const data = await fetch(`${process.env.APP_URL}/api/posts/${slug}`);
     const post: Post = await data.json();
 
     return {
@@ -62,7 +62,7 @@ export default async function Post({
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params;
-    const data = await fetch(`http://localhost:3000/api/posts/${slug}`);
+    const data = await fetch(`${process.env.APP_URL}/api/posts/${slug}`);
     const post: Post = await data.json();
 
     var formattedDate = new Date(post.modifiedAt).toLocaleDateString('en-US', {

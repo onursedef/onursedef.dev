@@ -12,7 +12,7 @@ export async function GET(request: Request) {
             response_type: "code",
             client_id: client_id,
             scope: "user-read-private user-read-email user-read-currently-playing",
-            redirect_uri: "http://localhost:3000/api/spotify/callback",
+            redirect_uri: `${process.env.APP_URL}/api/spotify/callback`,
             state: state
         }));
 }

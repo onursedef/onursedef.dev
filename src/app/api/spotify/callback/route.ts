@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     // Use URLSearchParams for x-www-form-urlencoded
     var data = new URLSearchParams();
     data.append("code", code as string);
-    data.append("redirect_uri", "http://localhost:3000/api/spotify/callback");
+    data.append("redirect_uri", `${process.env.APP_URL}/api/spotify/callback`);
     data.append("grant_type", "authorization_code");
 
     var apiReq = await fetch("https://accounts.spotify.com/api/token", {
