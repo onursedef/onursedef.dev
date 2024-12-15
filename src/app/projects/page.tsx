@@ -46,7 +46,14 @@ export const metadata = {
 
 async function getProjects() {
     const data = await fetch(`${process.env.APP_URL}/api/projects`);
-    const projects: Projects = await data.json();
+    let projects: Projects | null;
+
+    try {
+        projects = await data.json();
+    } catch (error) {
+        console.error('Error fetching projects:', error);
+        projects = null;
+    }
 
     return projects
 }
@@ -56,7 +63,7 @@ export default async function Projects() {
     return (
         <DefaultLayout isHome={false} title={'Projects'}>
             <div className="mt-6 flex flex-col gap-5">
-                {data.projects.map((project: Project) => (
+                {data != null && data?.projects.map((project: Project) => (
                     <ProjectCard key={project.title} project={project} />
                 ))}
             </div>

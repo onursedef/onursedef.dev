@@ -52,7 +52,14 @@ export const metadata = {
 
 async function getPosts() {
   const data = await fetch(`${process.env.APP_URL}/api/posts`);
-  const posts: Posts = await data.json();
+  let posts: Posts | null;
+
+  try {
+    posts = await data.json();
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    posts = null;
+  }
 
   return posts
 }
@@ -70,7 +77,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="mt-6 flex flex-col gap-5">
-        {posts.posts.map((post) => (
+        {posts && posts.posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
       </div>
