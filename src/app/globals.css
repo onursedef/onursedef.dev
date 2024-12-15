@@ -1,21 +1,72 @@
+@import '@fontsource/dm-mono';
+@import '@fontsource-variable/jetbrains-mono';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html, body {
+    font-family: 'DM Mono', monospace;
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-neutral-900 text-white;
+  }
+
+  .wp-block-kevinbatdorf-code-block-pro:first-child {
+    @apply rounded-3xl;
+  }
+  
+  .shiki {
+    @apply !px-4 !py-3;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.bar {
+  animation: equalize 1.2s ease-in-out infinite;
+}
+
+.bar:nth-child(1) {
+  animation-delay: -0.8s;
+}
+.bar:nth-child(2) {
+  animation-delay: -0.4s;
+}
+.bar:nth-child(3) {
+  animation-delay: -0.6s;
+}
+.bar:nth-child(4) {
+  animation-delay: -0.2s;
+}
+.bar:nth-child(5) {
+  animation-delay: -0.8s;
+}
+
+@keyframes equalize {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: 'translateY(-20px)';
+  }
+  100% {
+    opacity: 1;
+    transform: 'translateY(0)';
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
