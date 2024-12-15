@@ -1,5 +1,4 @@
 import React from "react";
-import Taksim from "@/lib/assets/img/taksim.png";
 import { PostCard } from "@/components/atomic/PostCard";
 import DefaultLayout from "@/components/layouts/DefaultLayout";
 import { Posts } from "@/lib/types/Post";
@@ -51,9 +50,15 @@ export const metadata = {
   keywords: ['website', 'nextjs', 'react', 'web development'],
 }
 
-export default async function Home() {
+async function getPosts() {
   const data = await fetch(`${process.env.APP_URL}/api/posts`);
   const posts: Posts = await data.json();
+
+  return posts
+}
+
+export default async function Home() {
+  const posts = await getPosts();
   return (
     <DefaultLayout
       isHome={true}>

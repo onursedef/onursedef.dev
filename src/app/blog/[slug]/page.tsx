@@ -55,15 +55,24 @@ export async function generateMetadata({
     }
 }
 
-
-export default async function Post({
-    params,
+async function getPost({
+    params
 }: {
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params;
-    const data = await fetch(`${process.env.APP_URL}/api/posts/${slug}`);
+    const data = await fetch(`/api/posts/${slug}`);
     const post: Post = await data.json();
+
+    return post
+}
+
+export default async function Post({
+    params
+}: {
+    params: Promise<{ slug: string }>
+}) {
+    const post = await getPost({ params });
 
     var formattedDate = new Date(post.modifiedAt).toLocaleDateString('en-US', {
         month: 'short',

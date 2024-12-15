@@ -2,7 +2,7 @@ import { Posts } from "@/lib/types/Post";
 
 export async function GET(request: Request) {
     const apiEndpoint = process.env.API_ENDPOINT;
-    const apiKey = await fetch('http://localhost:3000/api/auth', {
+    const apiKey = await fetch(`${process.env.APP_URL}/api/auth`, {
         method: 'POST'
     }).then(res => res.json()).then(data => data.authToken);
 

@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next"
+
 export default function RootLayout({
   children,
 }: {
@@ -8,6 +10,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="icon.ico" />
       </head>
+      <Analytics />
       <body>{children}</body>
     </html>
   )

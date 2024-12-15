@@ -1,7 +1,6 @@
 import type { Project, Projects } from '@/lib/types/Project';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import { ProjectCard } from '@/components/atomic/ProjectCard';
-import { Metadata, ResolvingMetadata } from 'next';
 
 export const metadata = {
     title: 'Projects | Onur Sedef',
@@ -45,16 +44,20 @@ export const metadata = {
     keywords: ['website', 'nextjs', 'react', 'web development'],
 };
 
-export default async function Projects() {
+async function getProjects() {
     const data = await fetch(`${process.env.APP_URL}/api/projects`);
     const projects: Projects = await data.json();
+
+    return projects
+}
+
+export default async function Projects() {
+    const data = await getProjects();
     return (
         <DefaultLayout isHome={false} title={'Projects'}>
             <div className="mt-6 flex flex-col gap-5">
-                {projects.projects.map((project: Project) => (
-                    <ProjectCard key={project.title} project={project}>
-                        {/* {project.content} */}
-                    </ProjectCard>
+                {data.projects.map((project: Project) => (
+                    <ProjectCard key={project.title} project={project} />
                 ))}
             </div>
         </DefaultLayout>

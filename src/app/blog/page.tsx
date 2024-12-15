@@ -1,7 +1,6 @@
 import { PostCard } from "@/components/atomic/PostCard";
 import DefaultLayout from "@/components/layouts/DefaultLayout"
 import { Post, Posts } from "@/lib/types/Post";
-import { Metadata, ResolvingMetadata } from "next";
 
 export const metadata = {
     title: 'Blog | Onur Sedef',
@@ -45,16 +44,20 @@ export const metadata = {
     keywords: ['website', 'nextjs', 'react', 'web development'],
 };
 
-export default async function Blog() {
+async function getPosts() {
     const data = await fetch(`${process.env.APP_URL}/api/posts`);
     const posts: Posts = await data.json();
+
+    return posts
+}
+
+export default async function Blog() {
+    const data = await getPosts();
     return (
         <DefaultLayout isHome={false} title={'Blog'}>
             <div className="mt-6 flex flex-col gap-5">
-                {posts.posts.map((post: Post) => (
-                    <PostCard key={post.slug} post={post}>
-                        {/* {post.content} */}
-                    </PostCard>
+                {data.posts.map((post: Post) => (
+                    <PostCard key={post.slug} post={post} />
                 ))}
             </div>
         </DefaultLayout>
