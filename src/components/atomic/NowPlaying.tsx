@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Redis from "ioredis";
 
 interface NowPlaying {
     albumName: string;
@@ -14,15 +15,59 @@ export const NowPlaying = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Get access token
-                const tokenRequest = await fetch("/api/spotify/token");
-                if (!tokenRequest.ok) {
-                    console.error("Failed to fetch token");
-                    return;
-                }
-                const tokenData = await tokenRequest.json();
+                let tokenData = null;
+                var redis = new Redis(process.env.REDIS_URL as string);
 
-                console.log(tokenData);
+                var spotifyData = await redis.get("spotifyData");
+
+                if (spotifyData && JSON.parse(spotifyData).expires_in < new Date().getTime()) {
+
+                    var data = new URLSearchParams();
+                    data.append("refresh_token", JSON.parse(spotifyData).refresh_token);
+                    data.append("grant_type", "refresh_token");
+
+                    var apiReq = await fetch("https://accounts.spotify.com/api/token", {
+                        method: "POST",
+                        body: data,
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'Authorization': `Basic ${Buffer.from(process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET).toString('base64')}`
+                        },
+                    });
+
+                    if (!apiReq.ok) {
+                        const text = await apiReq.text();
+                        console.error(`Spotify API Error [${apiReq.status}]:`, text);
+                        tokenData = null;
+                        return;
+                    }
+
+                    let apiRes;
+                    try {
+                        apiRes = await apiReq.json();
+                    } catch (err) {
+                        const text = await apiReq.text();
+                        console.error("API response was not JSON:", text);
+                        tokenData = null;
+                        return;
+                    }
+
+                    if (apiRes.error) {
+                        return Response.json({ error: apiRes.error });
+                    } else {
+                        var newData = {
+                            access_token: apiRes.access_token,
+                            expires_in: new Date().getTime() + apiRes.expires_in * 1000,
+                            refresh_token: JSON.parse(spotifyData).refresh_token,
+                        };
+
+                        await redis.set("spotifyData", JSON.stringify(newData));
+
+                        tokenData = newData;
+                    }
+                }
+
+                tokenData = JSON.parse(spotifyData as string)
                 // Get now playing
                 const nowPlayingRequest = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
                     headers: {
