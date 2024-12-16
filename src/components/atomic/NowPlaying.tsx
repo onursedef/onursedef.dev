@@ -1,6 +1,7 @@
+"use server";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Redis from "ioredis";
+import { setSpotifyData, currentTrackData } from "@/lib/utils";
 
 interface NowPlaying {
     albumName: string;
@@ -9,115 +10,54 @@ interface NowPlaying {
     artistName: string;
 }
 
-export const NowPlaying = () => {
-    const [nowPlaying, setNowPlaying] = useState<NowPlaying | null>(null);
+export async function getNowPlaying() {
+    const spotifyData = await currentTrackData();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let tokenData = null;
-                var redis = new Redis(process.env.REDIS_URL as string);
-
-                var spotifyData = await redis.get("spotifyData");
-
-                if (spotifyData && JSON.parse(spotifyData).expires_in < new Date().getTime()) {
-
-                    var data = new URLSearchParams();
-                    data.append("refresh_token", JSON.parse(spotifyData).refresh_token);
-                    data.append("grant_type", "refresh_token");
-
-                    var apiReq = await fetch("https://accounts.spotify.com/api/token", {
-                        method: "POST",
-                        body: data,
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization': `Basic ${Buffer.from(process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET).toString('base64')}`
-                        },
-                    });
-
-                    if (!apiReq.ok) {
-                        const text = await apiReq.text();
-                        console.error(`Spotify API Error [${apiReq.status}]:`, text);
-                        tokenData = null;
-                        return;
-                    }
-
-                    let apiRes;
-                    try {
-                        apiRes = await apiReq.json();
-                    } catch (err) {
-                        const text = await apiReq.text();
-                        console.error("API response was not JSON:", text);
-                        tokenData = null;
-                        return;
-                    }
-
-                    if (apiRes.error) {
-                        return Response.json({ error: apiRes.error });
-                    } else {
-                        var newData = {
-                            access_token: apiRes.access_token,
-                            expires_in: new Date().getTime() + apiRes.expires_in * 1000,
-                            refresh_token: JSON.parse(spotifyData).refresh_token,
-                        };
-
-                        await redis.set("spotifyData", JSON.stringify(newData));
-
-                        tokenData = newData;
-                    }
-                }
-
-                tokenData = JSON.parse(spotifyData as string)
-                // Get now playing
-                const nowPlayingRequest = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-                    headers: {
-                        "Authorization": `Bearer ${tokenData.access_token}`
-                    }
-                });
-
-                if (!nowPlayingRequest.ok && nowPlayingRequest.status !== 204) {
-                    console.error("Failed to fetch now playing");
-                    return;
-                }
-
-                if (nowPlayingRequest.status === 204) {
-                    setNowPlaying(null);
-                    return;
-                }
-
-                const response = await nowPlayingRequest.json();
-
-                if (!response) {
-                    return;
-                }
-
-                if (nowPlayingRequest.ok && response && response.item) {
-                    setNowPlaying({
-                        albumName: response.item.album.name,
-                        albumImage: response.item.album.images[0].url,
-                        songName: response.item.name,
-                        artistName: response.item.artists.length > 1
-                            ? response.item.artists
-                                .map((artist: any) => artist.name).join(", ")
-                            : response.item.artists[0].name
-                    });
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        // Set up an interval to fetch data every 30 seconds
-        fetchData(); // Initial fetch
-        const interval = setInterval(fetchData, 30000);
-
-        // Cleanup interval on component unmount
-        return () => clearInterval(interval);
-    }, []); // Empty dependency array since we're using setInterval
-
-    if (!nowPlaying) {
-        return null; // or a loading state
+    if (!spotifyData) {
+        return null;
     }
+
+    const tokenData = JSON.parse(spotifyData as string);
+
+    // Get now playing
+    const nowPlayingRequest = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
+        headers: {
+            "Authorization": `Bearer ${tokenData.access_token}`
+        }
+    });
+
+    if (!nowPlayingRequest.ok && nowPlayingRequest.status !== 204) {
+        console.error("Failed to fetch now playing");
+        return null;
+    }
+
+    if (nowPlayingRequest.status === 204) {
+        return null;
+    }
+
+    const response = await nowPlayingRequest.json();
+
+    if (!response) {
+        return null;
+    }
+
+    if (nowPlayingRequest.ok && response && response.item) {
+        return {
+            albumName: response.item.album.name,
+            albumImage: response.item.album.images[0].url,
+            songName: response.item.name,
+            artistName: response.item.artists.length > 1
+                ? response.item.artists
+                    .map((artist: any) => artist.name).join(", ")
+                : response.item.artists[0].name
+        };
+    }
+
+    return null;
+}
+
+export const NowPlaying = async () => {
+    const nowPlaying = await getNowPlaying();
 
     return (
         <React.Fragment>
