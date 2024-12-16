@@ -1,6 +1,7 @@
 import type { Project, Projects } from '@/lib/types/Project';
 import DefaultLayout from '@/components/layouts/DefaultLayout';
 import { ProjectCard } from '@/components/atomic/ProjectCard';
+import { Login } from '@/lib/types/Login';
 
 export const metadata = {
     title: 'Projects | Onur Sedef',
@@ -45,17 +46,141 @@ export const metadata = {
 };
 
 async function getProjects() {
-    const data = await fetch(`${process.env.APP_URL}/api/projects`);
-    let projects: Projects | null;
+    const username = process.env.ADMIN_USERNAME;
+    const password = process.env.ADMIN_PASSWORD;
+    const api_endpoint = process.env.API_ENDPOINT;
 
-    try {
-        projects = await data.json();
-    } catch (error) {
-        console.error('Error fetching projects:', error);
-        projects = null;
+    let query = `mutation {
+            login( input: {
+              clientMutationId: "uniqueId",
+              username: "${username}",
+              password: "${password}"
+            } ) {
+              authToken
+              user {
+                  id
+                  name
+              }
+            }
+          }`
+
+    var apiReq = await fetch(api_endpoint as string, {
+        method: "POST",
+        body: JSON.stringify({ query }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!apiReq.ok) {
+        const text = await apiReq.text();
+        console.error(`API Error [${apiReq.status}]:`, text);
+        return null;
     }
 
-    return projects
+    let apiRes;
+
+    try {
+        apiRes = await apiReq.json();
+    } catch (err) {
+        const text = await apiReq.text();
+        console.error("API response was not JSON:", text);
+        return null;
+    }
+
+    if (apiRes.errors) {
+        console.error("API Error:", apiRes.errors);
+        return null;
+    }
+
+    var loginData: Login = {
+        authToken: apiRes.data.login.authToken,
+        user: apiRes.data.login.user
+    }
+
+    query = `
+    query {
+  projects {
+    nodes {
+      author {
+        node {
+          firstName
+          lastName
+          avatar {
+            url
+          }
+        }
+      }
+      excerpt
+      title
+      featuredImage {
+        node {
+          altText
+          sourceUrl
+        }
+      }
+      githubUrls(first: 1) {
+          nodes {
+            name
+        	}
+      }
+      websiteUrls(first: 1) {
+        nodes {
+          name
+        }
+      }
+    }
+  }
+}`
+
+    apiReq = await fetch(api_endpoint as string, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${loginData.authToken}`
+        },
+        body: JSON.stringify({ query })
+    });
+
+    if (!apiReq.ok && apiReq.status !== 403) {
+        const text = await apiReq.text();
+        console.error(`API Error [${apiReq.status}]:`, text);
+        return null;
+    }
+
+    apiRes;
+
+    try {
+        apiRes = await apiReq.json();
+    } catch (err) {
+        const text = await apiReq.text();
+        console.error("API response was not JSON:", text);
+        return null;
+    }
+
+    var projects: Projects = {
+        projects: []
+    };
+
+    for (let project of apiRes.data.projects.nodes) {
+        projects.projects.push({
+            title: project.title,
+            description: project.excerpt,
+            githubUrl: project.githubUrls.length > 0 ? project.githubUrls[0].name : '',
+            websiteUrl: project.websiteUrls.length > 0 ? project.websiteUrls[0].name : '',
+            author: {
+                firstName: project.author.node.firstName,
+                lastName: project.author.node.lastName,
+                avatarUrl: project.author.node.avatar.url
+            },
+            featuredImage: {
+                altText: project.featuredImage.node.altText,
+                sourceUrl: project.featuredImage.node.sourceUrl
+            }
+        })
+    }
+
+    return projects;
 }
 
 export default async function Projects() {
