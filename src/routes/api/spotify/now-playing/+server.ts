@@ -45,7 +45,7 @@ export const GET: RequestHandler = async () => {
         NowPlayingStore.artist = response.item.artists.map((artist: { name: string }) => artist.name).join(", ");
         NowPlayingStore.isPlaying = response.is_playing;
 
-        setTrackData({
+        await setTrackData({
             album: NowPlayingStore.album,
             song: NowPlayingStore.song,
             artist: NowPlayingStore.artist,
