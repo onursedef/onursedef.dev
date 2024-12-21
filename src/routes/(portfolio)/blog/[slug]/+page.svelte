@@ -59,6 +59,18 @@
   }
 </script>
 
+
+<svelte:head>
+    <title>{post.seo.meta_title} | Onur Sedef</title>
+    <meta name="description" content="{post.seo.meta_description}" />
+    <meta name="keywords" content="{post.seo.meta_keywords}" />
+    <meta name="canonical" content="https://onursedef.dev/blog/{post.slug}" />
+    <meta property="og:title" content="Onur Sedef" />
+    <meta property="og:description" content="Onur Sedef's personal website" />
+    <meta property="og:image" content="/og_image.png" />
+    <meta property="og:url" content="https://onursedef.dev" />
+    <meta property="og:type" content="website" />
+</svelte:head>
 <div class="flex flex-col gap-2 w-full">
   <p class="text-sm text-neutral-400">{formattedDate} • {timeToRead} • {viewCount} views</p>
   <img src="https://directus.onursedef.dev/assets/{post.featured_image}/{post.slug}.png" alt="{post.title}" class="w-full aspect-auto object-cover rounded-lg" />

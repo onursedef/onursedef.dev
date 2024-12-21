@@ -8,6 +8,15 @@
     LayoutStore.backgroundImage = "/taksim.png";
 </script>
 
+<svelte:head>
+    <title>Onur Sedef</title>
+    <meta name="description" content="Onur Sedef's personal website" />
+    <meta property="og:title" content="Onur Sedef" />
+    <meta property="og:description" content="Onur Sedef's personal website" />
+    <meta property="og:image" content="/og_image.png" />
+    <meta property="og:url" content="https://onursedef.dev" />
+    <meta property="og:type" content="website" />
+</svelte:head>
 <div class="inline-flex w-full items-end justify-between">
     <h2 class="text-3xl">Blog</h2>
     <div class="group/see-more relative w-fit">
