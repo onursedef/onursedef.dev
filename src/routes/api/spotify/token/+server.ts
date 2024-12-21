@@ -1,14 +1,15 @@
 import { env } from "$env/dynamic/private";
-import { SpotifyStore } from "$lib/stores/SpotifyStore.svelte";
+import { getTokenData, setTokenData } from "$lib/redis";
 import { json, type RequestHandler } from "@sveltejs/kit";
 
 export const GET: RequestHandler = async () => {
-    const spotifyStore = SpotifyStore;
+    const tokenData = await getTokenData();
 
-    if (spotifyStore.expires_in != null && (spotifyStore.expires_in as number) < new Date().getTime()) {
+
+    if (tokenData.expires_in != null && (tokenData.expires_in as number) < new Date().getTime()) {
         const data = new URLSearchParams();
         data.append("grant_type", "refresh_token");
-        data.append("refresh_token", spotifyStore.refresh_token as string);
+        data.append("refresh_token", tokenData.refresh_token as string);
 
         const apiReq = await fetch("https://accounts.spotify.com/api/token", {
             method: "POST",
@@ -60,9 +61,11 @@ export const GET: RequestHandler = async () => {
             });
         }
 
-        spotifyStore.access_token = apiRes.access_token;
-        spotifyStore.expires_in = new Date().getTime() + apiRes.expires_in * 1000;
-        spotifyStore.refresh_token = apiRes.refresh_token;
+        tokenData.access_token = apiRes.access_token;
+        tokenData.expires_in = new Date().getTime() + apiRes.expires_in * 1000;
+        tokenData.refresh_token = apiRes.refresh_token;
+
+        await setTokenData(tokenData);
 
         return json({
             status: 200,
@@ -79,9 +82,9 @@ export const GET: RequestHandler = async () => {
     return json({
         status: 200,
         body: {
-            access_token: spotifyStore.access_token,
-            expires_in: (spotifyStore.expires_in as number) - new Date().getTime(),
-            refresh_token: spotifyStore.refresh_token
+            access_token: tokenData.access_token,
+            expires_in: (tokenData.expires_in as number) - new Date().getTime(),
+            refresh_token: tokenData.refresh_token
         }
     }, {
         status: 200
