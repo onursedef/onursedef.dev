@@ -22,20 +22,19 @@
     })
 </script>
 
-<div class="col-span-12 w-full h-px bg-neutral-700 my-2"></div>
-<div class="md:col-span-4">
-    <div class="font-semibold text-xl md:col-span-12 col-span-1 dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-        <a href="{experience.company_website_url}">
-            {experience.company_name}
-        </a>
+<div class="flex flex-col gap-2 w-full">
+    <div class="flex flex-col gap-2 w-full">
+        <div class="font-semibold text-xl md:col-span-12 col-span-1 hover:text-indigo-400 w-fit">
+            <a href="{experience.company_website_url}">
+                {experience.company_name}
+            </a>
+        </div>
+        <p class="font-semibold text-sm uppercase tracking-widest text-neutral-400">{experience.job_title}</p>
+        <p class="uppercase tracking-widest text-sm text-neutral-400">{formattedStartDate} - {formattedEndDate ?? 'Current'}</p>
     </div>
-    <p class="font-semibold">{experience.job_title}</p>
-    <p class="text-sm">{formattedStartDate} - {formattedEndDate ?? 'Current'}</p>
-</div>
-<div class="md:col-span-8 col-span-1 -mt-2 mb-4">
-    <p class="prose prose-invert text-white prose-sm leading-normal">
-        {@html description}
-    </p>
-    <p class="font-semibold text-xs uppercase text-neutral-500 mt-4 tracking-widest">Technologies</p>
-    <p class="mt-2 text-sm">{experience.technologies.join(" • ")}</p>
+    {@html description}
+    <div class="flex flex-col gap-2">
+        <p class="font-semibold text-xs uppercase text-neutral-500 tracking-widest">Technologies</p>
+        <p class="text-sm">{experience.technologies.join(" • ")}</p>
+    </div>
 </div>

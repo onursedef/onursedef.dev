@@ -8,6 +8,8 @@
 
     const { data } = $page;
 
+    data.resume.experiences = data.resume.experiences.reverse();
+
     function formatPhoneNumber(phone: string) {
         // Extract the country code, area code, and the rest of the number
         const match = phone.match(/^\+(\d{2})(\d{3})(\d{3})(\d{2})(\d{2})$/);
@@ -30,79 +32,100 @@
     }
 </script>
 
-<div class="grid md:grid-cols-12 grid-cols-1 gap-2 mx-auto md:w-[21cm] md:my-14 md:h-fit w-full h-fit bg-neutral-300 dark:bg-neutral-800 px-8 py-8 place-items-start rounded-lg font-inter">
-    <div class="flex items-start justify-between col-span-12 w-full">
-        <div class="flex items-center gap-3">
-            <Logo class="size-14 text-neutral-200" />
-            <p class="font-semibold text-3xl whitespace-nowrap">
-                {data.resume.full_name}
+<div class="flex w-full h-full justify-center md:my-14">
+    <div class="flex flex-col gap-4 max-auto md:w-[21cm] md:h-fit w-full h-fit bg-neutral-800 px-8 py-8 place-items-start md:rounded-lg font-inter">
+        <div class="flex w-full items-start justify-between flex-col md:flex-row md:gap-0 gap-2">
+            <div class="flex items-center gap-3">
+                <a href="/">
+                    <Logo class="size-14 text-indigo-400" />
+                </a>
+                <p class="font-semibold text-3xl whitespace-nowrap">
+                    {data.resume.full_name}
+                </p>
+            </div>
+            <a href="https://directus.onursedef.dev/assets/{data.resume.downloadable_cv}/Onur Sedef Resume.pdf?download"  download="Onur Sedef Resume.pdf" class="group inline-flex items-center gap-2 px-4 py-3 bg-neutral-900 rounded-md hover:bg-neutral-900/50 transition-colors">
+                <Icon icon="solar:download-broken" width="24" height="24" class="size-5 text-neutral-400 group-hover:text-white transition-colors" />
+                <p class="text-neutral-400 group-hover:text-white transition-colors text-sm">Download CV</p>
+            </a>
+        </div>
+        <div class="flex flex-col md:flex-row w-full items-start justify-between gap-4 md:gap-10">
+            <div class="flex flex-col w-full items-start gap-1">
+                <p class="hover:text-violet-400 w-fit whitespace-nowrap">
+                    {data.resume.location}
+                </p>
+                <p class="hover:text-violet-400 w-fit">
+                    <a href="mailto:{data.resume.mail}">{data.resume.mail}</a>
+                </p>
+                <p class="hover:text-violet-400 w-fit">
+                    <a href="{data.resume.github_url}">@{data.resume.github_url.split("https://github.com/")[1]}</a>
+                </p>
+                <p class="hover:text-violet-400 w-fit">
+                    <a href="{data.resume.portfolio_url}">{data.resume.portfolio_url.split("https://")[1]}</a>
+                </p>
+                <p class="hover:text-violet-400 w-fit">
+                    <a href="tel:{data.resume.phone_number}">{formatPhoneNumber(data.resume.phone_number)}</a>
+                </p>
+            </div>
+            <div>
+                <p>{data.resume.summary}</p>
+            </div>
+        </div>
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Experiences
             </p>
         </div>
-        <a href="https://directus.onursedef.dev/assets/{data.resume.downloadable_cv}/Onur Sedef Resume.pdf?download" target="_blank" download="Onur Sedef Resume.pdf" class="group inline-flex items-center gap-2 px-4 py-3 bg-neutral-900 rounded-md hover:bg-neutral-900/50 transition-colors">
-            <Icon icon="solar:download-broken" width="24" height="24" class="size-5 text-neutral-400 group-hover:text-white transition-colors" />
-            <p class="text-neutral-400 group-hover:text-white transition-colors text-sm">Download CV</p>
-        </a>
-    </div>
-    <div class="md:col-span-4 mt-4 col-span-2 whitespace-nowrap text-sm flex flex-col gap-1">
-        <p>{data.resume.location}</p>
-        <p class=" dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-          <a href="{data.resume.portfolio_url}">{data.resume.portfolio_url.split("https://")[1]}</a>
-        </p>
-        <p class=" dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-          <a href="mailto:{data.resume.mail}">{data.resume.mail}</a>
-        </p>
-        <p class=" dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-          <a href="{data.resume.github_url}">@{data.resume.github_url.split("https://github.com/")[1]}</a>
-        </p>
-        <p class=" dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-          <a href="tel:{data.resume.phone_number}">{formatPhoneNumber(data.resume.phone_number)}</a>
-        </p>
-    </div>
-    <div class="md:col-span-8 col-span-1 -mt-2 md:mt-2 font-light mb-2">
-        <p>{data.resume.summary}</p>
-    </div>
-    {#each data.resume.experiences as experience}
-        <ExperienceCard experience={experience} />
-    {/each}
-    <div class="md:col-span-12 col-span-1 mt-4 tracking-widest uppercase font-semibold text-sm text-neutral-500">
-        Projects
-    </div>
-    {#each data.resume.projects as project}
-        <ResumeProjectCard project={project} />
-    {/each}
-    <div class="md:col-span-12 col-span-1 mt-4 tracking-widest uppercase font-semibold text-sm text-neutral-500">
-        Education
-    </div>
-    {#each data.resume.educations as education}
-        <EducationCard education={education} />
-    {/each}
-    <div class="md:col-span-12 col-span-1 mt-4 tracking-widest uppercase font-semibold text-sm text-neutral-500">
-        Languages
-    </div>
-    <div class="md:col-span-12 col-span-1">
-        {#each data.resume.languages as language}
-            <p>• <span class="font-semibold">{language.name}</span>: {getLevel(language.level)}</p>
+        {#each data.resume.experiences as experience}
+            <ExperienceCard experience={experience} />
         {/each}
-    </div>
-    <div class="md:col-span-12 col-span-1 mt-4 tracking-widest uppercase font-semibold text-sm text-neutral-500">
-        Certificates
-    </div>
-    <div class="col-span-12">
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Projects
+            </p>
+        </div>
+        {#each data.resume.projects as project}
+            <ResumeProjectCard project={project} />
+        {/each}
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Education
+            </p>
+        </div>
+        {#each data.resume.educations as education}
+            <EducationCard education={education} />
+        {/each}
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Languages
+            </p>
+        </div>
+        <div class="flex flex-col gap-2">
+            {#each data.resume.languages as language}
+                <p>• <span class="font-semibold">{language.name}</span>: {getLevel(language.level)}</p>
+            {/each}
+        </div>
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Certificates
+            </p>
+        </div>
         <div class="flex flex-col gap-2">
             {#each data.resume.certificates as certificate}
-                <a href="{certificate.url}">
+                <a href="{certificate.url}" class="hover:text-indigo-400">
                     • {certificate.name}
                 </a>
             {/each}
         </div>
-    </div>
-    <div class="md:col-span-12 col-span-1 mt-4 tracking-widest uppercase font-semibold text-sm text-neutral-500">
-        Skills
-    </div>
-    {#each data.resume.skils as skill}
-        <div class="md:col-span-12 mt-2 col-span-1">
-            <p class="font-semibold text-xs uppercase text-neutral-500 mt-2 tracking-widest">{skill.name}</p>
-            <p class="mt-2">{skill.data.join(" • ")}</p>
+        <div class="w-full mt-4">
+            <p class="tracking-widest uppercase fontsemibold text-neutral-400 text-sm">
+                Skills
+            </p>
         </div>
-    {/each}
+        {#each data.resume.skils as skill}
+            <div class="flex flex-col gap-2">
+                <p class="font-semibold text-xs uppercase text-neutral-500 tracking-widest">{skill.name}</p>
+                <p>{skill.data.join(" • ")}</p>
+            </div>
+        {/each}
+    </div>
 </div>

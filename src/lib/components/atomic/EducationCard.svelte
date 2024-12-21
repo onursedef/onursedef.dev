@@ -29,14 +29,10 @@
     }
 </script>
 
-<div class="font-semibold text-xl md:col-span-12 col-span-1 dark:hover:text-violet-400 hover:text-violet-700 w-fit">
-    <p>
-        {education.title}
-    </p>
+<div class="flex flex-col w-full gap-2">
+    <p class="font-semibold text-xl hover:text-indigo-400">{education.title}</p>
+    <div class="flex justify-between max-w-xl">
+        <p>{formattedStartDate} - {formattedEndDate ?? 'Current'}</p>
+        <p>{getDegree(education.degree)} in {education.field_name}</p>
+    </div>
 </div>
-<p class="md:col-span-4 col-span-1">
-    {formattedStartDate} - {formattedEndDate ?? 'Current'}
-</p>
-<p class="md:col-span-8 col-span-1 -mt-2">
-    {getDegree(education.degree)} in {education.field_name}
-</p>
