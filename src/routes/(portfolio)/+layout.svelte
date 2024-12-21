@@ -57,7 +57,7 @@
 		</div>
 		<div class="relative top-6">
 			{#if isHome}
-				<p class="ml-40 text-lg md:text-xl sm:text-2xl md:hidden inline-flex items-center gap-3">Hello, I am <span class="font-bold">Onur</span> <Icon icon="fluent-emoji:waving-hand" width="32" height="32" /></p>
+				<p class="inline-block ml-40 text-lg sm:text-lg md:text-xl md:hidden gap-3">Hello, I am <span class="inline-block font-bold">Onur</span> <Icon icon="fluent-emoji:waving-hand" width="32" height="32" class="inline-block" /></p>
 			{:else}
 				<p class='text-2xl block md:hidden'>{layoutStore.title}</p>
 			{/if}
@@ -71,7 +71,7 @@
 	</div>
 	<img src="{layoutStore.backgroundImage}" alt="Taksim" class="h-64 w-full object-cover pointer-events-none select-none" />
 	{#if isHome}
-		<div class="max-w-3xl w-full h-full inline-flex justify-end md:mt-0 mt-20 md:px-0 px-3 z-10">
+		<div class="max-w-3xl w-full h-full inline-flex justify-end md:mt-0 sm:mt-20 mt-28 md:px-0 px-3 z-10">
 			<div class="max-w-[37rem] border border-neutral-700 bg-neutral-900/50 p-4 rounded-lg w-full h-fit">
 				<p>Hey there! I’m a back-end developer @ <a href="https://ottoo.com" class='font-semibold'>ottoo</a> with 2.5+ years of experience building scalable apps and automating workflows.</p>
 			</div>
