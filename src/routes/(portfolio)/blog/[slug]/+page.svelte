@@ -68,7 +68,7 @@
     <meta property="og:title" content="{post.seo.meta_title} | Onur Sedef" />
     <meta property="og:description" content="{post.seo.meta_description}" />
     <meta property="og:image" content="https://directus.onursedef.dev/assets/{post.seo.og_image}/{post.slug}.png" />
-    <meta property="og:url" content="https://onursedef.dev" />
+    <meta property="og:url" content="https://onursedef.dev/blog/{post.slug}" />
     <meta property="og:type" content="website" />
 </svelte:head>
 <div class="flex flex-col gap-2 w-full md:mt-0 mt-8">
