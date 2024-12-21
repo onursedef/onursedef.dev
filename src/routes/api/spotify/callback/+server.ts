@@ -1,4 +1,5 @@
 import { env } from "$env/dynamic/private";
+import { getTokenData, setTokenData } from "$lib/redis";
 import { SpotifyStore } from "$lib/stores/SpotifyStore.svelte";
 import type { SpotifyToken } from "$lib/types/SpotifyToken";
 import { redirect, type RequestHandler } from "@sveltejs/kit";
@@ -74,6 +75,12 @@ export const GET: RequestHandler = async ({ url }) => {
     SpotifyStore.access_token = spotifyData.access_token;
     SpotifyStore.refresh_token = spotifyData.refresh_token;
     SpotifyStore.expires_in = new Date().getTime() + (spotifyData.expires_in as number) * 1000;
+
+    await setTokenData(spotifyData);
+
+    const tokenData = await getTokenData();
+
+    console.log(tokenData);
 
     return redirect(302, new URL("/", url).toString());
 }

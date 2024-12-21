@@ -1,21 +1,13 @@
+import { currentTrackData, getTokenData, setTrackData } from "$lib/redis";
 import { NowPlayingStore } from "$lib/stores/NowPlayingStore.svelte";
-import { SpotifyStore } from "$lib/stores/SpotifyStore.svelte";
 import { json, type RequestHandler } from "@sveltejs/kit";
 
 export const GET: RequestHandler = async () => {
-    const spotifyStore = SpotifyStore;
-
-    if (spotifyStore.access_token === null) {
-        return json({
-            error: "no_access_token",
-        }, {
-            status: 401
-        });
-    }
+    const tokenData = await getTokenData();
 
     const nowPlayingReq = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         headers: {
-            "Authorization": "Bearer " + spotifyStore.access_token
+            "Authorization": "Bearer " + tokenData.access_token
         }
     });
 
@@ -52,12 +44,22 @@ export const GET: RequestHandler = async () => {
         }
         NowPlayingStore.artist = response.item.artists.map((artist: { name: string }) => artist.name).join(", ");
         NowPlayingStore.isPlaying = response.is_playing;
+
+        setTrackData({
+            album: NowPlayingStore.album,
+            song: NowPlayingStore.song,
+            artist: NowPlayingStore.artist,
+            isPlaying: NowPlayingStore.isPlaying
+        });
+
         return json(JSON.parse(JSON.stringify(NowPlayingStore)), {
             status: 200
         });
     }
 
-    return json(JSON.parse(JSON.stringify(NowPlayingStore)), {
+    const trackData = await currentTrackData();
+
+    return json(JSON.parse(JSON.stringify(trackData)), {
         status: 200
     });
 }
