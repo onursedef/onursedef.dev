@@ -1,0 +1,63 @@
+@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/dm-mono';
+@import '@fontsource/inter';
+@import '@fontsource-variable/nunito';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Tailwind css custom scrollbar */
+@layer base {
+
+    /* width */
+    ::-webkit-scrollbar {
+        @apply w-2
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply bg-none
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        @apply bg-neutral-500 hover:bg-neutral-500/75 rounded-full transition-colors;
+    }
+}
+
+.bar {
+    animation: equalize 1.2s ease-in-out infinite;
+}
+
+.bar:nth-child(1) {
+    animation-delay: -0.8s;
+}
+
+.bar:nth-child(2) {
+    animation-delay: -0.4s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: -0.6s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: -0.2s;
+}
+
+.bar:nth-child(5) {
+    animation-delay: -0.8s;
+}
+
+@keyframes equalize {
+
+    0%,
+    100% {
+        background-position: calc(100% - 1px) 0;
+        transform: scaleY(0.3);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
