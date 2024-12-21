@@ -45,6 +45,7 @@
 		"@iconify/svelte": "^4.1.0",
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/node": "^22.10.2",
+		"ioredis": "^5.4.2",
 		"marked": "^15.0.4",
 		"marked-highlight": "^2.2.1",
 		"query-string": "^9.1.1"
