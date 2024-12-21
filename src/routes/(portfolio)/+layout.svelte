@@ -57,9 +57,9 @@
 		</div>
 		<div class="relative top-6">
 			{#if isHome}
-				<p class="ml-40 text-xl sm:text-2xl md:hidden inline-flex items-center gap-3">Hello, I am <span class="font-bold">Onur</span> <Icon icon="fluent-emoji:waving-hand" width="32" height="32" /></p>
+				<p class="ml-40 text-lg md:text-xl sm:text-2xl md:hidden inline-flex items-center gap-3">Hello, I am <span class="font-bold">Onur</span> <Icon icon="fluent-emoji:waving-hand" width="32" height="32" /></p>
 			{:else}
-				<p class='text-xl sm:text-2xl block md:hidden'>{layoutStore.title}</p>
+				<p class='text-2xl block md:hidden'>{layoutStore.title}</p>
 			{/if}
 		</div>
 		{#if isHome}

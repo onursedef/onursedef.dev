@@ -71,7 +71,7 @@
     <meta property="og:url" content="https://onursedef.dev" />
     <meta property="og:type" content="website" />
 </svelte:head>
-<div class="flex flex-col gap-2 w-full">
+<div class="flex flex-col gap-2 w-full md:mt-0 mt-8">
   <p class="text-sm text-neutral-400">{formattedDate} • {timeToRead} • {viewCount} views</p>
   <img src="https://directus.onursedef.dev/assets/{post.featured_image}/{post.slug}.png" alt="{post.title}" class="w-full aspect-auto object-cover rounded-lg" />
   <div class="flex justify-between items-center mt-2 h-fit">
@@ -106,7 +106,7 @@
       <p class="text-sm text-neutral-400">{likeCount} likes</p>
     </div>
   </div>
-  <article class="prose prose-invert max-w-3xl w-max prose-pre:h-fit prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent prose-pre:font-jetbrains prose-code:h-fit prose-code:m-0 prose-code:p-0 font-nunito">
+  <article class="prose prose-invert max-w-3xl w-full prose-pre:h-fit prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent prose-pre:font-jetbrains prose-code:h-fit prose-code:m-0 prose-code:p-0 font-nunito">
     {@html post.content}
   </article>
 </div>
