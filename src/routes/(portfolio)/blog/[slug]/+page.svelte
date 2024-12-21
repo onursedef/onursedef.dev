@@ -65,8 +65,8 @@
     <meta name="description" content="{post.seo.meta_description}" />
     <meta name="keywords" content="{post.seo.meta_keywords}" />
     <meta name="canonical" content="https://onursedef.dev/blog/{post.slug}" />
-    <meta property="og:title" content="Onur Sedef" />
-    <meta property="og:description" content="Onur Sedef's personal website" />
+    <meta property="og:title" content="{post.seo.meta_title} | Onur Sedef" />
+    <meta property="og:description" content="{post.seo.meta_description}" />
     <meta property="og:image" content="https://directus.onursedef.dev/assets/{post.seo.og_image}/{post.slug}.png" />
     <meta property="og:url" content="https://onursedef.dev" />
     <meta property="og:type" content="website" />
