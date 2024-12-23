@@ -15,6 +15,21 @@
                 console.error("Failed to load now playing:", err);
             });
     })
+
+    $effect(() => {
+        const interval = setInterval(() => {
+            fetch('/api/spotify/now-playing')
+                .then(res => res.json())
+                .then(data => {
+                    nowPlaying = data;
+                })
+                .catch(err => {
+                    console.error("Failed to load now playing:", err);
+                });
+        }, 180000);
+
+        return () => clearInterval(interval);
+    })
 </script>
 
 {#if nowPlaying.album != null}
