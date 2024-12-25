@@ -1,9 +1,26 @@
-import { currentTrackData, getTokenData, setTrackData } from "$lib/redis";
+import { currentTrackData, getTokenData, setTokenData, setTrackData } from "$lib/redis";
 import { NowPlayingStore } from "$lib/stores/NowPlayingStore.svelte";
 import { json, type RequestHandler } from "@sveltejs/kit";
 
 export const GET: RequestHandler = async () => {
     const tokenData = await getTokenData();
+
+    if (!tokenData || tokenData.expires_in === null || tokenData.expires_in < Date.now()) {
+        const refreshTokenReq = await fetch("/api", { method: "POST", });
+
+        if (!refreshTokenReq.ok) {
+            console.error("Failed to refresh token. Status: " + refreshTokenReq.status);
+        } else {
+            const refreshTokenData = await refreshTokenReq.json();
+            await setTokenData({
+                access_token: refreshTokenData.access_token,
+                expires_in: Date.now() + refreshTokenData.expires_in * 1000,
+                refresh_token: tokenData.refresh_token
+            });
+            tokenData.access_token = refreshTokenData.access_token;
+            tokenData.expires_in = Date.now() + refreshTokenData.expires_in * 1000;
+        }
+    }
 
     const nowPlayingReq = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
         headers: {
@@ -13,14 +30,32 @@ export const GET: RequestHandler = async () => {
 
     if (!nowPlayingReq.ok && nowPlayingReq.status !== 204) {
         console.error("Failed to fetch now playing. Status: " + nowPlayingReq.status);
-        return json(JSON.parse(JSON.stringify(NowPlayingStore)), {
+        const trackData = await currentTrackData();
+        if (trackData.isPlaying) {
+            await setTrackData({
+                album: trackData.album,
+                song: trackData.song,
+                artist: trackData.artist,
+                isPlaying: false
+            });
+        }
+        return json(JSON.parse(JSON.stringify(trackData)), {
             status: 200
         });
     }
 
     if (nowPlayingReq.status === 204) {
         NowPlayingStore.isPlaying = false;
-        return json(JSON.parse(JSON.stringify(NowPlayingStore)), {
+        const trackData = await currentTrackData();
+        if (trackData.isPlaying) {
+            await setTrackData({
+                album: trackData.album,
+                song: trackData.song,
+                artist: trackData.artist,
+                isPlaying: false
+            });
+        }
+        return json(JSON.parse(JSON.stringify(trackData)), {
             status: 200
         });
     }
@@ -52,7 +87,9 @@ export const GET: RequestHandler = async () => {
             isPlaying: NowPlayingStore.isPlaying
         });
 
-        return json(JSON.parse(JSON.stringify(NowPlayingStore)), {
+        const trackData = await currentTrackData();
+
+        return json(JSON.parse(JSON.stringify(trackData)), {
             status: 200
         });
     }
